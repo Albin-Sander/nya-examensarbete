@@ -60,6 +60,7 @@ export default {
   modules: [
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+
     [
       '@nuxtjs/firebase',
 
@@ -74,7 +75,7 @@ export default {
         },
         services: {
           auth: true,
-          fireStore: true, // Just as example. Can be any other service.
+          firestore: true, // Just as example. Can be any other service.
         },
       },
     ],

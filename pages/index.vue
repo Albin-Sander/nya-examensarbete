@@ -39,9 +39,21 @@ export default {
         console.log(e)
       }
     },
+
+    async readFromFirestore() {
+      const messageRef = this.$fire.firestore.collection('test').doc('test')
+      console.log(messageRef.get())
+
+      try {
+        const messageDoc = await messageRef.get()
+      } catch (e) {
+        alert(e)
+        console.log(e)
+      }
+    },
   },
   mounted() {
-    this.createUser()
+    this.createUser(), this.readFromFirestore()
   },
 }
 </script>
