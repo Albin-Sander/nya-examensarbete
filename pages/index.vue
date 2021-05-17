@@ -2,9 +2,7 @@
   <div class="container">
     <div>
       <Logo />
-      <h1 class="title">
-        examensarbete
-      </h1>
+      <h1 class="title">examensarbete</h1>
       <div class="links">
         <a
           href="https://nuxtjs.org/"
@@ -29,7 +27,23 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    async createUser() {
+      try {
+        await this.$fire.auth.createUserWithEmailAndPassword(
+          'foo@foo.foo',
+          'test123'
+        )
+      } catch (e) {
+        console.log(e)
+      }
+    },
+  },
+  mounted() {
+    this.createUser()
+  },
+}
 </script>
 
 <style>
