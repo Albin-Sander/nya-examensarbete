@@ -29,6 +29,7 @@
 <script>
 export default {
   methods: {
+    // Auth
     async createUser() {
       try {
         await this.$fire.auth.createUserWithEmailAndPassword(
@@ -40,20 +41,42 @@ export default {
       }
     },
 
-    async readFromFirestore() {
-      const messageRef = this.$fire.firestore.collection('test').doc('test')
-      console.log(messageRef.get())
+    //FireStore
 
+    //Get data from db test an document test
+    async getData() {
+      const db = this.$fire.firestore
+        .collection('test')
+        .doc('GJhjnGSWINKcHjMsnUrj')
       try {
-        const messageDoc = await messageRef.get()
+        const doc = await db.get()
+        console.log(doc.data())
       } catch (e) {
-        alert(e)
-        console.log(e)
+        console.error(e)
       }
     },
+
+    // Add Document
+    async addUser() {
+      const db = this.$fire.firestore.collection('test')
+      const x = await db.get()
+      console.log('Inside addUser')
+      this.getAllData()
+      await db.doc('UUID').set({
+        username: 'Markus',
+      })
+    },
+
+    // Get data from db test
+    async getAllData() {
+      const snapshot = await this.$fire.firestore.collection('test').get()
+      const readable = snapshot.docs.map((doc) => doc.data())
+      console.log(readable)
+    },
   },
+
   mounted() {
-    this.createUser(), this.readFromFirestore()
+    this.getData(), this.createUser()
   },
 }
 </script>
