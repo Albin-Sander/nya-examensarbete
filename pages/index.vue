@@ -2,9 +2,7 @@
   <div class="container">
     <div>
       <Logo />
-      <h1 class="title">
-        examensarbete
-      </h1>
+      <h1 class="title">examensarbete</h1>
       <div class="links">
         <a
           href="https://nuxtjs.org/"
@@ -29,7 +27,58 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    // Auth
+    async createUser() {
+      try {
+        await this.$fire.auth.createUserWithEmailAndPassword(
+          'foo@foo.foo',
+          'test123'
+        )
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    //FireStore
+
+    //Get data from db test an document test
+    async getData() {
+      const db = this.$fire.firestore
+        .collection('test')
+        .doc('GJhjnGSWINKcHjMsnUrj')
+      try {
+        const doc = await db.get()
+        console.log(doc.data())
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
+    // Add Document
+    async addUser() {
+      const db = this.$fire.firestore.collection('test')
+      const x = await db.get()
+      console.log('Inside addUser')
+      this.getAllData()
+      await db.doc('UUID').set({
+        username: 'Markus',
+      })
+    },
+
+    // Get data from db test
+    async getAllData() {
+      const snapshot = await this.$fire.firestore.collection('test').get()
+      const readable = snapshot.docs.map((doc) => doc.data())
+      console.log(readable)
+    },
+  },
+
+  mounted() {
+    this.getData(), this.createUser()
+  },
+}
 </script>
 
 <style>
