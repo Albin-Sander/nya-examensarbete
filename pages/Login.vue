@@ -1,41 +1,10 @@
 <template>
-  <div>
-    <form v-if="user == false" v-on:submit.prevent="getRequest">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input
-          type="email"
-          v-model="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          required
-        />
-        <small id="emailHelp" class="form-text text-muted"
-          >We'll never share your email with anyone else.</small
-        >
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input
-          type="password"
-          v-model="password"
-          class="form-control"
-          id="exampleInputPassword1"
-          placeholder="Password"
-          required
-        />
-      </div>
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" @click="createUser()" class="btn btn-primary">
-        Submit
-      </button>
-    </form>
-    <h2 v-else>Logged in as {{user.email}} </h2>
+  <div class="login-container">
+    <LazyLoginForm v-if="user.user == false" />
+    <div v-else> 
+      <h2> Logged in as {{user.email}} </h2> 
+      <button @click="signOut()"> Logout </button>
+    </div>
   </div>
 </template>
 
@@ -49,9 +18,6 @@ export default {
     } 
   },
   methods: {
-    async getRequest() {
-
-    },
     async createUser() {
       try {
         console.log("inside the try")
@@ -63,38 +29,57 @@ export default {
         console.log(e)
       }
     },
+    async signIn() {
+      let vm = this
+      try {
+        console.log("inside the try")
+        await this.$fire.auth.signInWithEmailAndPassword(
+          vm.email,
+          vm.password
+        ).then((userCredential) => {
+          let user = userCredential.user
+          console.log(user.email)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    }, 
 
     //FireStore
 
     //Get data from db test an document test
     async getData() {
-      const db = this.$fire.firestore
-        .collection('test')
-        .doc('GJhjnGSWINKcHjMsnUrj')
-      try {
-        const doc = await db.get()
-        console.log(doc.data())
-      } catch (e) {
-        console.error(e)
-      }
+      // const db = this.$fire.firestore
+      //   .collection('test')
+      //   .doc('GJhjnGSWINKcHjMsnUrj')
+      // try {
+      //   const doc = await db.get()
+      //   console.log(doc.data())
+      // } catch (e) {
+      //   console.error(e)
+      // }
     },
 
     // Add Document
     async addUser() {
-      const db = this.$fire.firestore.collection('users')
-      const x = await db.get()
-      console.log('Inside addUser')
-      this.getAllData()
-      await db.doc('UUID').set({
-        username: 'Markus',
-      })
+      // THS IS JUST A EXAMPLE. DO NOT ADD A USER THIS WAY
+      // const db = this.$fire.firestore.collection('users')
+      // const x = await db.get()
+      // console.log('Inside addUser')
+      // this.getAllData()
+      // await db.doc('UUID').set({
+      //   username: 'Markus',
+      // })
     },
 
     // Get data from db test
     async getAllData() {
-      const snapshot = await this.$fire.firestore.collection('users').get()
-      const readable = snapshot.docs.map((doc) => doc.data())
-      console.log(readable)
+      // const snapshot = await this.$fire.firestore.collection('users').get()
+      // const readable = snapshot.docs.map((doc) => doc.data())
+      // console.log(readable)
     },
     async checkUser() {
       let vm = this;
@@ -113,6 +98,16 @@ export default {
         vm.user = obj
       })
     },
+    async signOut() {
+      let vm = this
+      await this.$fire.auth.signOut().then(() => {
+        console.log("Logged out")
+        let obj = {user: false, email: ""}
+        vm.user = obj
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   },
   computed: {
   
@@ -123,4 +118,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.form {
+  padding-bottom: 15rem;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>
