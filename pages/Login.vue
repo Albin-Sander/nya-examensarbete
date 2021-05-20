@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form v-on:submit.prevent="getRequest">
+    <form v-if="user == false" v-on:submit.prevent="getRequest">
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input
@@ -35,6 +35,7 @@
         Submit
       </button>
     </form>
+    <h2 v-else>Logged in as {{user.email}} </h2>
   </div>
 </template>
 
@@ -44,52 +45,12 @@ export default {
     return {
       email: '',
       password: '',
-    }
+      user: "",
+    } 
   },
   methods: {
     async getRequest() {
-      // let id = process.env.CLIENT_ID
-      // console.log(id)
-      // // Do API stuff
-      // let url =
-      //   'https://api.jamendo.com/v3.0/oauth/authorize?client_id=a31f0360&redirect_uri=/'
 
-      // const response = await fetch(url, {
-      //   method: 'GET',
-      //   headers: {
-      //     'CONTENT-TYPE': 'application/json',
-      //   },
-      //   mode: 'no-cors',
-      // })
-      // let readable = await response.json()
-      // console.log(readable)
-      // return readable
-
-      //  .then(console.log(respone => response.json()))
-      //  .then(response => console.log(data))
-
-      // this.$axios.get(), {
-      //     url: url,
-      //     type: 'GET',
-      //     cors: true ,
-      //     contentType:'application/json',
-      //     secure: true,
-      //                   headers: {
-      //             'Access-Control-Allow-Origin': '*',
-      //         },
-      // }
-      // .then(function (response) {
-      //     // handle success
-      //     console.log(response);
-      // })
-      // .catch(function (error) {
-      //     // handle error
-      //     console.log(error);
-      // })
-      // .then(function () {
-      //     // always executed
-      //     });
-      // }
     },
     async createUser() {
       try {
@@ -135,7 +96,30 @@ export default {
       const readable = snapshot.docs.map((doc) => doc.data())
       console.log(readable)
     },
+    async checkUser() {
+      let vm = this;
+      let result = await this.$fire.auth.onAuthStateChanged(async function(user) {
+        let obj
+        if (user) {
+          console.log(user.email)
+          obj = {user: true, email: await user.email}
+       
+        } else {
+          console.log("no user")
+          obj = {user: false, email: ""}
+          
+        }
+        console.log(obj)
+        vm.user = obj
+      })
+    },
   },
+  computed: {
+  
+  },
+  mounted() {
+    this.checkUser()
+  }
 }
 </script>
 
