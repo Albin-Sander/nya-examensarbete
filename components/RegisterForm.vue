@@ -1,6 +1,6 @@
 <template>
     <form
-      v-on:submit.prevent="signIn()"
+      v-on:submit.prevent="registerUser()"
       class="form"
     >
       <div class="form-group">
@@ -14,9 +14,6 @@
           placeholder="Enter email"
           required
         />
-        <small id="emailHelp" class="form-text text-muted"
-          >We'll never share your email with anyone else.</small
-        >
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
@@ -29,8 +26,18 @@
           required
         />
       </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Repeat password</label>
+        <input
+          type="password"
+          v-model="passwordMatch"
+          class="form-control"
+          id="exampleInputPassword1"
+          placeholder="Password"
+          required
+        />
+      </div>
       <div class="form-check">
-        <NuxtLink to="/signup/registration">Don't have a account? Click here!</NuxtLink>
       </div>
       <button type="submit" class="btn btn-primary">
         Submit
@@ -43,26 +50,32 @@ export default {
   data: () => {
     return {
       email: '',
-      password: ''
+      password: '',
+      passwordMatch: ''
     } 
   },
   methods: {
-    accountCreation() {
-      return this.$emit("account-creation")
-    },
-    async signIn() {
+    async registerUser() {
+        if (this.password !== this.passwordMatch) {
+            return alert("Password does not match")
+        }
       let vm = this
       try {
         console.log("inside the try")
-        await this.$fire.auth.signInWithEmailAndPassword(
+        await this.$fire.auth.createUserWithEmailAndPassword(
           vm.email,
           vm.password
         ).then((userCredential) => {
           let user = userCredential.user
           console.log(user.email)
+          return window.location.href = '/'
+
         })
         .catch((error) => {
           console.log(error)
+          if(error.code == "auth/email-already-in-use") {
+              return alert("This email is already in use!")
+          }
         })
       } catch (e) {
         console.log(e)
