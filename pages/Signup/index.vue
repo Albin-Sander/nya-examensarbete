@@ -1,11 +1,14 @@
 <template>
   <!-- This page should be reachable if user user exists -->
-  <div class="login-container">
+  <div v-if="user" class="login-container">
     <LazyLoginForm v-if="user.user == false"/>
     <div v-else> 
       <h2> Logged in as {{user.email}} </h2>
       <button @click="signOut()"> sign out </button>
     </div>
+  </div>
+  <div v-else class="login-container">
+    <h2>Loading...</h2>
   </div>
 </template>
 
@@ -127,7 +130,7 @@ export default {
 
 <style scoped>
 .form {
-  padding-bottom: 15rem;
+ 
 }
 
 .login-container {
@@ -135,5 +138,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding-bottom: 15rem;
 }
 </style>

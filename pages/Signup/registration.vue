@@ -1,6 +1,6 @@
 <template>
   <!-- This page should be reachable if user user exists -->
-  <div class="login-container">
+  <div class="registraion-container">
     <LazyRegisterForm v-if="user.user == false"/>
     <div v-else> 
       <h2> Loading... </h2>
@@ -125,14 +125,12 @@ export default {
 </script>
 
 <style scoped>
-.form {
-  padding-bottom: 15rem;
-}
 
-.login-container {
+.registraion-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding-bottom: 15rem;
 }
 </style>
