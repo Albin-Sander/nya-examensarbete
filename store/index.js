@@ -14,6 +14,9 @@ export const actions = {
   async newUser(context, params) {
     let cancelOperation = false
     const ref = this.$fire.firestore.collection('users')
+
+    // Checks have been resolved and should work, test additionaly
+    
     const matchingEmails = await ref.where('email', '==', params.email).get()
     const matchingUserNames = await ref.where('displayName', '==', params.userName).get()
     if (matchingEmails.empty && matchingUserNames.empty) {
@@ -23,7 +26,7 @@ export const actions = {
       console.log("Found matching documents")
     }
 
-    try {
+    try { // Checks have been resolved and should work, test additionaly
       if (!cancelOperation) {
         console.log(cancelOperation)
         console.log(params) 
