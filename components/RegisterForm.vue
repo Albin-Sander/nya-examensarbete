@@ -1,17 +1,31 @@
 <template>
   <form v-on:submit.prevent="registerUser()" class="form">
     <div class="fields-container">
-      <div class="form-group">
-        <label for="exampleInputEmail1" class="label">Email address</label>
-        <input
-          type="email"
-          v-model="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          required
-        />
+      <div class="credentials-field">
+        <div class="form-group">
+          <label for="exampleInputEmail1" class="label">Email address</label>
+          <input
+            type="email"
+            v-model="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="label">Username</label>
+          <input
+            type="text"
+            v-model="userName"
+            class="form-control"
+            id=""
+            aria-describedby=""
+            placeholder="Username"
+            required
+          />
+        </div>
       </div>
       <div class="password-fields">
         <div class="form-group">
@@ -47,15 +61,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data: () => {
     return {
       email: '',
+      userName: '',
       password: '',
       passwordMatch: '',
     }
   },
   methods: {
+    ...mapActions({
+      createUser: 'newUser',
+    }),
     async registerUser() {
       if (this.password !== this.passwordMatch) {
         return alert('Password does not match')
@@ -63,13 +82,22 @@ export default {
       let vm = this
       try {
         console.log('inside the try')
-        await this.$fire.auth
-          .createUserWithEmailAndPassword(vm.email, vm.password)
-          .then((userCredential) => {
-            let user = userCredential.user
-            console.log(user.email)
-            return (window.location.href = '/')
-          })
+        const obj = {
+          email: vm.email,
+          userName: vm.userName,
+        }
+        //console.log(user.email)
+        let result = await vm.createUser(obj)
+        console.log(result)
+          // await this.$fire.auth
+          //   .createUserWithEmailAndPassword(vm.email, vm.password)
+          //   .then((userCredential) => {
+          //     let user = userCredential.user
+          //     
+          //     console.log(user.email)
+          //   
+          //     return (window.location.href = '/')
+          //   })
           .catch((error) => {
             console.log(error)
             if (error.code == 'auth/email-already-in-use') {
@@ -113,7 +141,7 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 20rem;
+  height: 27rem;
   width: 70%;
   max-width: 20rem;
   padding: 1rem;
@@ -121,10 +149,13 @@ input {
 }
 
 .fields-container {
-  height: 11rem;
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.credentials-field {
 }
 
 .password-fields {
@@ -158,7 +189,8 @@ input {
   display: flex;
   width: 100%;
   justify-content: center;
-  padding-bottom: 1rem;
+  height: 40%;
+  align-items: center;
 }
 
 .btn {
