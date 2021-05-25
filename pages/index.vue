@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div>
+      <Search />
       <Logo />
       <h1 class="title">examensarbete</h1>
       <div class="links">
