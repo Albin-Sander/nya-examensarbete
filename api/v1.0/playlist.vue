@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <ul>
+    <!-- <ul>
       <li v-for="(playlist, index) in playListName" :key="index">
         <b-card
           img-src="https://picsum.photos/600/300/?image=25"
@@ -13,6 +13,14 @@
           {{ playlist }}
         </b-card>
       </li>
+    </ul> -->
+    <ul id="v-for-object" class="demo">
+      <li v-for="(value, index) in playLists" :key="index">
+        {{ value.name }}
+        <a v-bind:href="value.shorturl">
+          {{ value.shorturl }}
+        </a>
+      </li>
     </ul>
   </div>
 </template>
@@ -22,8 +30,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      playLists: [],
-      playListName: [],
+      playLists: {},
     }
   },
   methods: {
@@ -58,10 +65,6 @@ export default {
           console.log(response)
           vm.playLists = response.data.results
           console.log(JSON.stringify(vm.playLists))
-
-          for (let i = 0; i < 9; i++) {
-            vm.playListName.push(vm.playLists[i].name)
-          }
         })
         .catch(function (error) {
           // handle error
