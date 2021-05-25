@@ -1,9 +1,17 @@
 <template>
   <div id="main">
-    <h1>Hello</h1>
     <ul>
       <li v-for="(playlist, index) in playListName" :key="index">
-        {{ playlist }}
+        <b-card
+          img-src="https://picsum.photos/600/300/?image=25"
+          img-alt="Image"
+          img-top
+          tag="article"
+          style="max-width: 20rem"
+          class="mb-2"
+        >
+          {{ playlist }}
+        </b-card>
       </li>
     </ul>
   </div>
@@ -47,13 +55,26 @@ export default {
         .get(url)
         .then(function (response) {
           // handle success
-          console.log(response.data)
+          console.log(response)
           vm.playLists = response.data.results
           console.log(JSON.stringify(vm.playLists))
 
           for (let i = 0; i < 9; i++) {
             vm.playListName.push(vm.playLists[i].name)
           }
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error)
+        })
+    },
+
+    goToPlayList() {
+      let url = axios
+        .get(url)
+        .then(function (response) {
+          // handle success
+          console.log(response.data)
         })
         .catch(function (error) {
           // handle error
@@ -70,5 +91,15 @@ export default {
 <style>
 li {
   list-style: none;
+  border-style: solid;
+  padding: 15px;
+  margin-top: 7px;
+  display: flex;
+  justify-content: center;
+}
+
+li:hover {
+  background-color: blue;
+  cursor: pointer;
 }
 </style>

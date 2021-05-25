@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main">
     <h1>Test site</h1>
     <playlist />
   </div>
@@ -13,4 +13,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+#main {
+  display: flex;
+  justify-content: center;
+}
+</style>
