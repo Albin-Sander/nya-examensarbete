@@ -4,14 +4,29 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export const state = () => ({
-  counter: 0,
+  credentialsExist: false,
 })
+
+export const mutations = {
+  setCredentialsExist (state) {
+    console.log('hi')
+    state.credentialsExist = true
+  },
+  setCredentialsDoesNotExist (state) {
+    console.log('hi')
+    state.credentialsExist = false
+  }
+}
 
 export const actions = {
   async writeToFirestore() {
     return console.log('hi')
   },
   async newUser(context, params) {
+    console.log(context)
+    console.log("--------------------------------------")
+    console.log(state)
+    console.log("--------------------------------------")
     let cancelOperation = false
     const ref = this.$fire.firestore.collection('users')
 
@@ -21,14 +36,16 @@ export const actions = {
     const matchingUserNames = await ref.where('displayName', '==', params.userName).get()
     if (matchingEmails.empty && matchingUserNames.empty) {
       console.log("No matching documents")
+      context.commit("setCredentialsDoesNotExist")
     } else {
       cancelOperation = true
       console.log("Found matching documents")
+      context.commit("setCredentialsExist")
     }
 
     try { // Checks have been resolved and should work, test additionaly
-      if (!cancelOperation) {
-        console.log(cancelOperation)
+      console.log(context.state.credentialsExist)
+      if (!context.state.credentialsExist) {
         console.log(params) 
         const data = {
           email: params.email,
@@ -37,7 +54,7 @@ export const actions = {
         }
         await ref.add(data)
       } else {
-        return alert("username or email is already taken")
+        return 
       }
     } catch (e) {
       return Promise.reject(e)
