@@ -2,7 +2,7 @@
   <!-- This page should be reachable if user user exists -->
   <div v-if="user" class="login-container">
     <LazyLoginForm v-if="user.user == false"/>
-    <div v-else> 
+    <div v-else class="example">  
       <h2> Logged in as {{user.email}} </h2>
       <button @click="signOut()"> sign out </button>
     </div>
@@ -131,6 +131,11 @@ export default {
 <style scoped>
 .form {
  
+}
+
+.example {
+  margin-bottom: auto;
+  padding: 2rem;
 }
 
 .login-container {
