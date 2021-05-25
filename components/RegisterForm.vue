@@ -25,6 +25,9 @@
             placeholder="Username"
             required
           />
+          <div v-if="showCredentialsTaken">
+            <p class="credentials-taken">Username or email is already in use</p>
+          </div>
         </div>
       </div>
       <div class="password-fields">
@@ -69,6 +72,7 @@ export default {
       userName: '',
       password: '',
       passwordMatch: '',
+      showCredentialsTaken: false,
     }
   },
   methods: {
@@ -77,39 +81,43 @@ export default {
     }),
     async registerUser() {
       if (this.password !== this.passwordMatch) {
+        this.passwordMatch = 'Password does not match!'
         return alert('Password does not match')
       }
+      this.passwordMatch = ''
       let vm = this
       try {
-        console.log('inside the try')
         const obj = {
           email: vm.email,
           userName: vm.userName,
         }
         //console.log(user.email)
-        let result = await vm.createUser(obj)
-        console.log(result)
-          // await this.$fire.auth
-          //   .createUserWithEmailAndPassword(vm.email, vm.password)
-          //   .then((userCredential) => {
-          //     let user = userCredential.user
-          //     
-          //     console.log(user.email)
-          //   
-          //     return (window.location.href = '/')
-          //   })
-          .catch((error) => {
-            console.log(error)
-            if (error.code == 'auth/email-already-in-use') {
-              return alert('This email is already in use!')
-            }
-          })
-      } catch (e) {
-        console.log(e)
+        await vm.createUser(obj)
+        if (!this.credentialsTaken) {
+          console.log('Inside if credentialsTaken is not true')
+          await this.$fire.auth.createUserWithEmailAndPassword(vm.email, vm.password).then((userCredential) => {
+              let user = userCredential.user
+              console.log(user.email)
+              return (window.location.href = '/')
+            }).catch((error) => {
+              console.log(error)
+              if (error.code == 'auth/email-already-in-use') {
+                return alert('This email is already in use!')
+              }
+            })
+        } else {
+          return (vm.showCredentialsTaken = true)
+        }
+      } catch (error) {
+        console.log(error)
       }
     },
   },
-  computed: {},
+  computed: {
+    credentialsTaken() {
+      return this.$store.state.credentialsExist
+    },
+  },
   mounted() {},
 }
 </script>
@@ -149,10 +157,14 @@ input {
 }
 
 .fields-container {
-  height: 60%;
+  height: 65%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.credentials-taken {
+  color: #00dcff
 }
 
 .credentials-field {
@@ -176,7 +188,7 @@ input {
 }
 
 .link {
-  color: #17a2b8;
+  color: #00dcff;
   font-weight: 600;
 }
 
@@ -189,7 +201,7 @@ input {
   display: flex;
   width: 100%;
   justify-content: center;
-  height: 40%;
+  height: 35%;
   align-items: center;
 }
 
