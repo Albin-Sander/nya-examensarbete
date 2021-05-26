@@ -16,29 +16,44 @@
 
     <div id="app-instasearch">
       <div class="input-container">
-        <input type="text" placeholder="search..." v-model="SearchString" />
-                <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        <input
+          @click="displayComponent"
+          type="text"
+          placeholder="search..."
+          v-model="SearchString"
+        />
+        <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
       </div>
 
-      <transition-group id="list-group" tag="ul" name="list-animation">
+      <transition-group
+        v-bind:class="{ active: isActive }"
+        id="list-group"
+        tag="ul"
+        name="list-animation"
+      >
         <b-card
-    class="mb-2"
+          class="mb-2"
           v-for="results in filteredFeed"
           v-bind:key="results.id"
         >
-        <!--create click function to share button-->
-      <img @click="shareFunction" class="svg" v-bind:src="require(`../assets/icon.svg`)">
-				<img v-bind:src="results.image" />
+          <!--create click function to share button-->
+          <button v-if="webShareApiSupported">
+            <img
+              @click="shareViaWebShare"
+              class="svg"
+              v-bind:src="require(`../assets/icon.svg`)"
+            />
+          </button>
+          <img v-bind:src="results.image" />
           <span class="author">{{ results.album_name }}</span>
           <Popupmodal />
 
-          <audio>  
-            <source v-bind:src="results.audio">
-            </audio>
+          <audio>
+            <source v-bind:src="results.audio" />
+          </audio>
         </b-card>
       </transition-group>
     </div>
-
   </div>
 </template>
 
@@ -50,12 +65,14 @@ export default {
     return {
       SearchString: '',
       data: null,
+      isActive: true,
     }
   },
   created() {
+    let CLIENT_ID = process.env.clientId
     this.$axios
       .get(
-        'https://api.jamendo.com/v3.0/tracks/?client_id=a31f0360&limit=50&order=popularity_total&lang=en'
+        `https://api.jamendo.com/v3.0/tracks/?client_id=${CLIENT_ID}&limit=50&order=popularity_total&lang=en`
       )
       .then((response) => {
         this.data = response.data.results
@@ -63,14 +80,14 @@ export default {
       })
       .catch((error) => console.log(error))
   },
-    mounted() {
-      var results = this.data
-      try{
-         navigator.share(results.shareurl)
-      }catch(err) {
-        console.log('error' + err)
-      }
-    },
+  mounted() {
+    var results = this.data
+    try {
+      navigator.share(data.results.shareurl)
+    } catch (err) {
+      console.log('error' + err)
+    }
+  },
 
   computed: {
     filteredFeed: function () {
@@ -94,26 +111,33 @@ export default {
 
       return results
     },
+    webShareApiSupported() {
+      return navigator.share
+    },
+
+    shareFunction: function () {
+      let results = this.data.shareurl
+      try {
+        navigator.share(results)
+      } catch (err) {
+        console.log('error' + err)
+      }
+      return results
+    },
   },
 
   methods: {
-    shareFunction: () => {
-     let fetch = this.$axios
-      .get(
-        'https://api.jamendo.com/v3.0/tracks/?client_id=a31f0360&limit=15&order=popularity_total&lang=en'
-      )
-      .then((response) => {
-        this.data = response.data.results
-        console.log(response.data.results)
+    shareViaWebShare() {
+      navigator.share({
+        title: 'Title to be shared',
+        text: 'Text to be shared',
+        url: `https://www.jamendo.com/track/`,
       })
-      
-      let results = fetch.data.results.shareurl
-      try{
-         navigator.share(results)
-      }catch(err) {
-        console.log('error' + err)
-      }
-    }
+    },
+
+    displayComponent() {
+      this.isActive = !this.isActive
+    },
   },
 }
 </script>
@@ -123,7 +147,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-.svg{
+.svg {
   width: 3rem;
 }
 
@@ -165,7 +189,7 @@ header h1 {
 
 .input-container {
   border-radius: 5px;
-  background: #1E1133;
+  background: #1e1133;
   padding: 10px;
 }
 
@@ -199,9 +223,9 @@ header h1 {
   font-size: 25px;
   margin-left: 20px;
   color: white;
-    display: flex;
-    justify-content: center;
-    }
+  display: flex;
+  justify-content: center;
+}
 
 .title {
   border-radius: 5px;
@@ -221,18 +245,21 @@ header h1 {
 .list-animation-leave-active {
   position: absolute;
 }
-img{
+img {
   max-width: 20rem;
 }
 ul {
-    background: #3B2460;
-    padding: 5%;
-    overflow-y: scroll;
-    height: 800px;
-  }
+  background: #3b2460;
+  padding: 5%;
+  overflow-y: scroll;
+  height: 800px;
+}
 
-  .mb-2{
-      transition: all 0.5s;
-    background-color: #1E1133;
-  }
+.mb-2 {
+  transition: all 0.5s;
+  background-color: #1e1133;
+}
+.active {
+  display: none;
+}
 </style>

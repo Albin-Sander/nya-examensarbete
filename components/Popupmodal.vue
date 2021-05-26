@@ -6,6 +6,17 @@
 
 <script>
   export default {
+    created() {
+    let CLIENT_ID = process.env.clientId
+    this.$axios
+      .get(
+        `https://api.jamendo.com/v3.0/tracks/?client_id=${CLIENT_ID}&limit=50&order=popularity_total&lang=en`
+      )
+      .then((response) => {
+        this.data = response.data.results
+      })
+      .catch((error) => console.log(error))
+    },
 
     methods: {
       showMsgOk() {
@@ -15,8 +26,8 @@
         // More complex structure
         const messageVNode = h('div', { class: ['foobar'] }, [
           h('p', { class: ['text-center'] }, [
-            ' Flashy ',
-            h('strong', 'msgBoxOk'),
+            ' Jamendo ',
+            h('strong', 'artist'),
             ' message ',
           ]),
           h('p', { class: ['text-center'] },),
