@@ -94,7 +94,7 @@ export default {
         if (user) {
           console.log(user.email)
           obj = {user: true, email: await user.email}
-          return (window.location.href = '/')
+          return //(window.location.href = '/')
         } else {
           console.log("no user")
           obj = {user: false, email: ""}
