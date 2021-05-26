@@ -136,7 +136,7 @@ export default {
     },
 
     displayComponent() {
-      this.isActive = !this.isActive
+      this.isActive = false
     },
   },
 }
