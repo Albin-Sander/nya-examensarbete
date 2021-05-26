@@ -28,6 +28,9 @@
           <div v-if="showCredentialsTaken">
             <p class="credentials-taken">Username or email is already in use</p>
           </div>
+          <div v-if="emailTaken">
+            <p class="credentials-taken">Email is already in use!</p>
+          </div>
         </div>
       </div>
       <div class="password-fields">
@@ -42,7 +45,7 @@
             required
           />
         </div>
-        <div class="form-group">
+        <div class="form-group contain-errormsg">
           <label for="exampleInputPassword1" class="label"
             >Repeat password</label
           >
@@ -54,6 +57,12 @@
             placeholder="Password"
             required
           />
+          <div v-if="passwordDoesNotMatch">
+            <p class="credentials-taken">Password does not match!</p>
+          </div>
+          <div v-if="passwordToWeak">
+            <p class="credentials-taken">Password to short!</p>
+          </div>
         </div>
       </div>
     </div>
@@ -72,37 +81,69 @@ export default {
       userName: '',
       password: '',
       passwordMatch: '',
+      passwordDoesNotMatch: false,
       showCredentialsTaken: false,
+      emailTaken: false,
+      passwordToWeak: false,
     }
   },
   methods: {
     ...mapActions({
-      createUser: 'newUser',
+      checkUserCredentials: 'checkUserCredentials',
+      addNewUser: 'addNewUser',
     }),
     async registerUser() {
+      this.passwordDoesNotMatch = false
       if (this.password !== this.passwordMatch) {
-        this.passwordMatch = 'Password does not match!'
-        return alert('Password does not match')
+        this.showCredentialsTaken = false
+        this.passwordToWeak = false
+        this.emailTaken = false
+        return (this.passwordDoesNotMatch = true)
       }
       this.passwordMatch = ''
+      this.passwordToWeak = false
+      this.emailTaken = false
       let vm = this
       try {
         const obj = {
           email: vm.email,
           userName: vm.userName,
         }
-        //console.log(user.email)
-        await vm.createUser(obj)
+
+        await vm.checkUserCredentials(obj)
         if (!this.credentialsTaken) {
+          console.log(this.credentialsTaken)
           console.log('Inside if credentialsTaken is not true')
-          await this.$fire.auth.createUserWithEmailAndPassword(vm.email, vm.password).then((userCredential) => {
+          await this.$fire.auth
+            .createUserWithEmailAndPassword(vm.email, vm.password)
+            .then(async (userCredential) => {
               let user = userCredential.user
               console.log(user.email)
-              return (window.location.href = '/')
-            }).catch((error) => {
+              await vm.addNewUser(obj)
+              await this.$fire.auth
+                .signOut()
+                .then(() => {
+                  console.log('Logged out')
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
+              return (window.location.href = '/signup')
+            })
+            .catch((error) => {
               console.log(error)
               if (error.code == 'auth/email-already-in-use') {
-                return alert('This email is already in use!')
+                // The error codes we should display to the user
+                // "auth/email-already-in-use"
+                // "auth/weak-password"
+                return (vm.emailTaken = true)
+              } else if (error.code == 'auth/weak-password') {
+                return (vm.passwordToWeak = true)
+              } else {
+                vm.passwordToWeak = false
+                vm.emailTaken = false
+                console.log(error)
+                return
               }
             })
         } else {
@@ -149,7 +190,7 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 27rem;
+  height: 28rem;
   width: 70%;
   max-width: 20rem;
   padding: 1rem;
@@ -164,7 +205,11 @@ input {
 }
 
 .credentials-taken {
-  color: #00dcff
+  color: #00dcff;
+}
+
+.contain-errormsg {
+  height: 4rem;
 }
 
 .credentials-field {
