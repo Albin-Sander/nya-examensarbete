@@ -57,7 +57,10 @@ export default {
             console.log(user.email)
           })
           .catch((error) => {
-            console.log(error)
+           
+            console.log(error.code)
+            // "auth/wrong-password"
+            // "auth/user-not-found"
           })
       } catch (e) {
         console.log(e)
