@@ -23,6 +23,7 @@
           v-model="SearchString"
         />
         <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        <b-button v-bind:class="{ active: isActive }" @click="hideComponent" size="sm" class="my-2 my-sm-0" type="submit">Hide list</b-button>
       </div>
 
       <transition-group
@@ -138,6 +139,9 @@ export default {
     displayComponent() {
       this.isActive = false
     },
+    hideComponent() {
+      this.isActive = true
+    }
   },
 }
 </script>
