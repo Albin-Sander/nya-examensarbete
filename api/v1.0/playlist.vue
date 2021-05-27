@@ -1,25 +1,16 @@
 <template>
   <div id="main">
-    <!-- <ul>
-      <li v-for="(playlist, index) in playListName" :key="index">
-        <b-card
-          img-src="https://picsum.photos/600/300/?image=25"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem"
-          class="mb-2"
-        >
-          {{ playlist }}
-        </b-card>
-      </li>
-    </ul> -->
-    <ul id="v-for-object" class="demo">
+    <ul id="v-for-object">
       <li v-for="(value, index) in playLists" :key="index">
-        {{ value.name }}
-        <a v-bind:href="value.shorturl">
-          {{ value.shorturl }}
-        </a>
+        <b-card :title="value.name" class="b-card-title text-center">
+          <b-button v-bind:href="value.shorturl" variant="primary"
+            >Go to playlist <img src="~/assets/arrow-right_white.svg"
+          /></b-button>
+          <b-button v-bind:href="value.zip" variant="primary"
+            >Download <img src="~/assets/downloadbutton_white.svg"
+          /></b-button>
+          <b-button @click="playAudio">test</b-button>
+        </b-card>
       </li>
     </ul>
   </div>
@@ -84,6 +75,25 @@ export default {
           console.log(error)
         })
     },
+    play() {
+      let audio = new Audio('https://mp3d.jamendo.com/stream/p500606942/mp32/')
+      audio.play()
+    },
+    playAudio() {
+      let url =
+        'https://api.jamendo.com/v3.0/playlists/tracks/?client_id=a31f0360&format=jsonpretty&limit=2&name=Instrumental&track_type=albumtrack'
+      axios
+        .get(url)
+        .then(function (response) {
+          // handle success
+          console.log(response.data.results)
+          response.play()
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error)
+        })
+    },
   },
   mounted() {
     this.getPlaylist()
@@ -95,7 +105,7 @@ export default {
 li {
   list-style: none;
   border-style: solid;
-  padding: 15px;
+
   margin-top: 7px;
   display: flex;
   justify-content: center;
@@ -104,5 +114,13 @@ li {
 li:hover {
   background-color: blue;
   cursor: pointer;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.b-card-title {
 }
 </style>
