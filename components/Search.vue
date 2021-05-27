@@ -47,6 +47,13 @@
           </button>
           <img v-bind:src="results.image" />
           <span class="author">{{ results.album_name }}</span>
+          <audio
+        controls
+        src="https://mp3l.jamendo.com//?trackid=887202&format=mp31&from=app-devsite">
+          
+            <code>audio</code> element.
+    </audio>
+
           <Popupmodal />
 
           <audio>
