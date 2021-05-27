@@ -13,7 +13,7 @@
           required
         />
       </div>
-      <div class="">
+      <div class="specific-padding">
         <label for="exampleInputPassword1" class="label">Password</label>
         <input
           type="password"
@@ -23,13 +23,19 @@
           placeholder="Password"
           required
         />
+        <div v-if="passwordDoesNotMatch">
+          <p class="credentials-taken">Password does not match!</p>
+        </div>
+        <div v-if="couldNotFindUser">
+          <p class="credentials-taken">Password does not match!</p>
+        </div>
         <div class="">
           <NuxtLink class="link" to="/signup/registration">Create new account</NuxtLink>
         </div>
       </div>
     </div>
     <div class="button-container">
-      <button type="submit" class="btn btn-primary"> LOGIN </button>
+      <button type="submit" class="btn btn-primary" v-bind:class="{ btnActivated: email.length > 0 && password.length > 0 }"> LOGIN </button>
     </div>
   </form>
 </template>
@@ -40,6 +46,9 @@ export default {
     return {
       email: '',
       password: '',
+      btnActive: false,
+      passwordDoesNotMatch: false,
+      couldNotFindUser: false
     }
   },
   methods: {
@@ -57,8 +66,15 @@ export default {
             console.log(user.email)
           })
           .catch((error) => {
-           
-            console.log(error.code)
+            if(error.code == "auth/wrong-password") {
+              // Do this
+              return vm.passwordDoesNotMatch = true
+            } else if (erroe.code == "auth/user-not-found") {
+              // Do that
+              return vm.couldNotFindUser = true
+            } else {
+              console.log(error.code)
+            }
             // "auth/wrong-password"
             // "auth/user-not-found"
           })
@@ -109,8 +125,11 @@ input {
 .fields-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 50%;
+  height: 55%;
+}
+
+.specific-padding {
+  padding-top: 1rem;
 }
 
 .label {
@@ -127,6 +146,10 @@ input {
   background-color: #1e1133;
 }
 
+.credentials-taken {
+  margin: 0px;
+}
+
 .link {
   color: #17A2B8;
   font-weight: 600;
@@ -140,8 +163,9 @@ input {
 .button-container {
   display: flex;
   width: 100%;
+  height: 45%;
   justify-content: center;
-  padding-bottom: 1rem;
+  padding-top: 2rem;
 }
 
 .btn {
@@ -150,7 +174,11 @@ input {
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-size: 20px;
+  background-color: #17a3b8ce;
+  border: none
+}
+
+.btnActivated{
   background-color: #17A2B8;
-  border: #17A2B8;
 }
 </style>

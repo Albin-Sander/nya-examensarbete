@@ -67,7 +67,19 @@
       </div>
     </div>
     <div class="button-container">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        v-bind:class="{
+          btnActivated:
+            email.length > 0 &&
+            password.length > 0 &&
+            userName.length > 0 &&
+            passwordMatch.length > 0,
+        }"
+      >
+        Submit
+      </button>
     </div>
   </form>
 </template>
@@ -256,7 +268,11 @@ input {
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-size: 20px;
+  background-color: #17a3b8ce;
+  border: none;
+}
+
+.btnActivated {
   background-color: #17a2b8;
-  border: #17a2b8;
 }
 </style>
