@@ -24,6 +24,20 @@ html {
   box-sizing: border-box;
 }
 
+.card {
+  background-color: #1E1133;
+  border-radius: 0.2rem;
+  color: white
+}
+
+body {
+  background-color: #271642;
+}
+
+button {
+  background-color: #17A2B8;
+  color: white
+}
 *,
 *::before,
 *::after {
