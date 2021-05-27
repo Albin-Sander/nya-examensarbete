@@ -5,7 +5,7 @@
       <Logo />
       <h1 class="title">examensarbete</h1>
       <div class="links">
-        <NuxtLink to="/login">Login Page</NuxtLink>
+        <NuxtLink to="/login">Log in</NuxtLink>
         <a
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"

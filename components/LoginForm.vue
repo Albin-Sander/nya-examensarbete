@@ -30,12 +30,20 @@
           <p class="credentials-taken">Password does not match!</p>
         </div>
         <div class="">
-          <NuxtLink class="link" to="/signup/registration">Create new account</NuxtLink>
+          <NuxtLink class="link" to="/signup/registration"
+            >Create new account</NuxtLink
+          >
         </div>
       </div>
     </div>
     <div class="button-container">
-      <button type="submit" class="btn btn-primary" v-bind:class="{ btnActivated: email.length > 0 && password.length > 0 }"> LOGIN </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        v-bind:class="{ btnActivated: email.length > 0 && password.length > 0 }"
+      >
+        LOGIN
+      </button>
     </div>
   </form>
 </template>
@@ -48,7 +56,7 @@ export default {
       password: '',
       btnActive: false,
       passwordDoesNotMatch: false,
-      couldNotFindUser: false
+      couldNotFindUser: false,
     }
   },
   methods: {
@@ -66,12 +74,12 @@ export default {
             console.log(user.email)
           })
           .catch((error) => {
-            if(error.code == "auth/wrong-password") {
+            if (error.code == 'auth/wrong-password') {
               // Do this
-              return vm.passwordDoesNotMatch = true
-            } else if (erroe.code == "auth/user-not-found") {
+              return (vm.passwordDoesNotMatch = true)
+            } else if (error.code == 'auth/user-not-found') {
               // Do that
-              return vm.couldNotFindUser = true
+              return (vm.couldNotFindUser = true)
             } else {
               console.log(error.code)
             }
@@ -151,7 +159,7 @@ input {
 }
 
 .link {
-  color: #17A2B8;
+  color: #17a2b8;
   font-weight: 600;
 }
 
@@ -175,10 +183,10 @@ input {
   font-weight: 900;
   font-size: 20px;
   background-color: #17a3b8ce;
-  border: none
+  border: none;
 }
 
-.btnActivated{
-  background-color: #17A2B8;
+.btnActivated {
+  background-color: #17a2b8;
 }
 </style>
