@@ -12,7 +12,6 @@
       </b-nav-form>
     </b-navbar-nav>
     -->
-    <button @click="getResult()">click me</button>
 
     <div id="app-instasearch">
       <div class="input-container">
