@@ -3,14 +3,16 @@
     <div id="app-instasearch">
       <div class="input-container">
         <input
+        class="input-field"
           @click="displayComponent"
           type="text"
           placeholder="search..."
           v-model="term"
+          
         />
         <b-button @click="search" type="button" class="btn btn-outline-primary"
-          >Search</b-button
-        >
+          >Search
+          </b-button>
         <b-button
           v-bind:class="{ active: isActive }"
           @click="hideComponent"
@@ -40,6 +42,7 @@
             <source v-bind:src="result.audio" />
           </audio>
         </b-card>
+        
       </div>
     </div>
   </div>
@@ -94,10 +97,11 @@ export default {
         this.audio.pause()
         this.audio.currentTime = 0
       }
+
       fetch(
         `https://api.jamendo.com/v3.0/tracks/?client_id=${CLIENT_ID}&search=${encodeURIComponent(
           this.term
-        )}&limit=5&order=downloads_week`
+        )}&limit=5&order=downloads_week&groupby=artist_id`
       )
         .then((res) => res.json())
         .then((res) => {
