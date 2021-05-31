@@ -301,6 +301,4 @@ button:focus {
   border: none;
 }
 
-.btnActivated {
-}
 </style>

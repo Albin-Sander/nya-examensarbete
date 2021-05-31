@@ -2,7 +2,7 @@
   <form v-on:submit.prevent="signIn()" class="form card">
     <div class="fields-container">
       <div class="">
-        <label for="exampleInputEmail1" class="label">Email address</label>
+        <label class="label">Email address</label>
         <input
           type="email"
           v-model="email"
@@ -15,7 +15,7 @@
         />
       </div>
       <div class="specific-padding">
-        <label for="exampleInputPassword1" class="label">Password</label>
+        <label class="label">Password</label>
         <input
           type="password"
           v-model="password"
@@ -121,6 +121,7 @@ export default {
 
 input {
   color: white;
+  z-index: 1;
 }
 
 input:active {
@@ -211,6 +212,5 @@ button:active:focus, button:focus {
   font-weight: 900;
   font-size: 20px;
   border: none;
-  color: white
 }
 </style>
