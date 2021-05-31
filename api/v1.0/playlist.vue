@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <ul id="v-for-object">
-      <li v-for="(value, index) in playLists" :key="index">
+      <li v-for="(value, index) in playLists" :key="index" class="list">
         <b-card :title="value.name" class="b-card-title text-center">
           <b-button v-bind:href="value.shorturl" variant="primary"
             >Go to playlist <img src="~/assets/arrow-right_white.svg"
@@ -102,23 +102,13 @@ export default {
 </script>
 
 <style>
-li {
+.list {
   list-style: none;
   border-style: solid;
 
   margin-top: 7px;
   display: flex;
   justify-content: center;
-}
-
-li:hover {
-  background-color: blue;
-  cursor: pointer;
-}
-
-ul {
-  display: flex;
-  flex-direction: column;
 }
 
 .b-card-title {
