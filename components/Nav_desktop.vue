@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="nav justify-content-center">
+    <ul class="nav-ul nav justify-content-center">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page">
           <NuxtLink to="/">Home</NuxtLink>
@@ -29,4 +29,14 @@
 export default {}
 </script>
 
-<style></style>
+<style>
+.nav-ul {
+  display: none;
+}
+
+@media only screen and (min-width: 770px) {
+  .nav-ul {
+    display: flex;
+  }
+}
+</style>

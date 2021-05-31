@@ -1,20 +1,22 @@
 <template>
   <div>
+    <Nav />
     <Nuxt />
   </div>
 </template>
 
+<script>
+import Nav from '../components/Nav_desktop'
+
+export default {
+  components: { Nav },
+}
+</script>
+
 <style>
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -24,20 +26,6 @@ html {
   box-sizing: border-box;
 }
 
-.card {
-  background-color: #1E1133;
-  border-radius: 0.2rem;
-  color: white
-}
-
-body {
-  background-color: #271642;
-}
-
-button {
-  background-color: #17A2B8;
-  color: white
-}
 *,
 *::before,
 *::after {
