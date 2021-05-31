@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar-mobile">
+  <nav class="navbar-mobile switch">
     <ul class="navbar-mobile-list">
       <li class="navbar-mobile-list-item" v-on:click="changePage('home')">
         <NuxtLink to="/">
@@ -79,13 +79,19 @@ export default {
 <style scoped>
 .navbar-mobile {
   position: fixed;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   height: 3rem;
   width: 100vw;
   background-color: #1e1133;
   bottom: 0;
+}
+
+@media only screen and (max-width: 770px) {
+  .navbar-mobile {
+    display: flex;
+  }
 }
 
 .navbar-mobile-list {
