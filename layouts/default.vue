@@ -54,15 +54,18 @@ body {
 
 .globalBtnActive:hover {
   background-color: #17A2B8;
+  color:white
 }
 
 .globalBtnInactive {
   background-color: #17A2B89E;
   /* #106B79 */
   font-family: 'Lato', sans-serif;
+  color:white
 }
 
 .globalBtnInactive:hover {
   background-color: #17A2B89E;
+  color:white
 }
 </style>
