@@ -20,7 +20,7 @@
         </NuxtLink>
       </li>
       <li class="navbar-mobile-list-item" v-on:click="changePage('search')">
-        <NuxtLink to="/login">
+        <NuxtLink to="/search">
           <svg
             width="24"
             height="24"
@@ -39,7 +39,7 @@
         </NuxtLink>
       </li>
       <li class="navbar-mobile-list-item" v-on:click="changePage('library')">
-        <NuxtLink to="/playplaylist">
+        <NuxtLink to="/">
           <svg
             width="24"
             height="24"
