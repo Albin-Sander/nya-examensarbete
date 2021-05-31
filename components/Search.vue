@@ -1,65 +1,50 @@
 <template>
   <div>
-    <!--
-    <b-navbar-nav class="ml-auto">
-      <b-nav-form>
-        <b-form-input
-          size="sm"
-          class="mr-sm-2"
-          placeholder="Search"
-        ></b-form-input>
-        <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-      </b-nav-form>
-    </b-navbar-nav>
-    -->
-
     <div id="app-instasearch">
       <div class="input-container">
         <input
+        class="input-field"
           @click="displayComponent"
           type="text"
           placeholder="search..."
-          v-model="SearchString"
+          v-model="term"
+          
         />
-        <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-        <b-button v-bind:class="{ active: isActive }" @click="hideComponent" size="sm" class="my-2 my-sm-0" type="submit">Hide list</b-button>
+        <b-button @click="search" type="button" class="btn btn-outline-primary"
+          >Search
+          </b-button>
+        <b-button
+          v-bind:class="{ active: isActive }"
+          @click="hideComponent"
+          size="sm"
+          class="my-2 my-sm-0"
+          type="submit"
+          >Hide list</b-button
+        >
       </div>
 
-      <transition-group
+      <div
         v-bind:class="{ active: isActive }"
         id="list-group"
         tag="ul"
         name="list-animation"
       >
-        <b-card
-          class="mb-2"
-          v-for="results in filteredFeed"
-          v-bind:key="results.id"
-        >
+        <b-card class="mb-2" v-for="result in results" v-bind:key="result.id">
           <!--create click function to share button-->
-          <button v-if="webShareApiSupported">
-            <img
-              @click="shareViaWebShare"
-              class="svg"
-              v-bind:src="require(`../assets/icon.svg`)"
-            />
-          </button>
-          <img v-bind:src="results.image" />
-          <span class="author">{{ results.album_name }}</span>
-          <audio
-        controls
-        src="https://mp3l.jamendo.com//?trackid=887202&format=mp31&from=app-devsite">
-          
-            <code>audio</code> element.
-    </audio>
 
-          <Popupmodal />
+          <img v-bind:src="result.image" />
+          <span class="author">{{ result.album_name }}</span>
+          <button @click="play(result.audio)">&#9658; Play Sample</button>
 
+<b-button @click="addTrack(result)">
+add to library
+</b-button>
           <audio>
-            <source v-bind:src="results.audio" />
+            <source v-bind:src="result.audio" />
           </audio>
         </b-card>
-      </transition-group>
+        
+      </div>
     </div>
   </div>
 </template>
@@ -71,28 +56,11 @@ export default {
   data: () => {
     return {
       SearchString: '',
+      term: '',
+      results: [],
       data: null,
+      audio: null,
       isActive: true,
-    }
-  },
-  created() {
-    let CLIENT_ID = process.env.clientId
-    this.$axios
-      .get(
-        `https://api.jamendo.com/v3.0/tracks/?client_id=${CLIENT_ID}&limit=50&order=popularity_total&lang=en`
-      )
-      .then((response) => {
-        this.data = response.data.results
-        console.log(response.data.results)
-      })
-      .catch((error) => console.log(error))
-  },
-  mounted() {
-    var results = this.data
-    try {
-      navigator.share(data.results.shareurl)
-    } catch (err) {
-      console.log('error' + err)
     }
   },
 
@@ -121,25 +89,55 @@ export default {
     webShareApiSupported() {
       return navigator.share
     },
-
-    shareFunction: function () {
-      let results = this.data.shareurl
-      try {
-        navigator.share(results)
-      } catch (err) {
-        console.log('error' + err)
-      }
-      return results
-    },
   },
 
   methods: {
-    shareViaWebShare() {
-      navigator.share({
-        title: 'Title to be shared',
-        text: 'Text to be shared',
-        url: `https://www.jamendo.com/track/`,
-      })
+    search: function () {
+      let CLIENT_ID = process.env.clientId
+      if (this.audio) {
+        this.audio.pause()
+        this.audio.currentTime = 0
+      }
+
+      fetch(
+        `https://api.jamendo.com/v3.0/tracks/?client_id=${CLIENT_ID}&search=${encodeURIComponent(
+          this.term
+        )}&limit=5&order=downloads_week&groupby=artist_id`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          this.results = res.results
+        })
+      console.log(this.results)
+    },
+    play: function (s) {
+      if (this.audio) {
+        this.audio.pause()
+        this.audio.currentTime = 0
+      }
+      this.audio = new Audio(s)
+      this.audio.play()
+    },
+    addTrack:  function(t) {
+  try {
+    let ref = this.results;
+   
+    for (var key in ref) {
+    var obj = ref[key].album_name;
+           this.$fire.firestore.collection("test").doc("GJhjnGSWINKcHjMsnUrj").set({
+         track: obj
+         
+       })
+             console.log('added:', obj);
+
+}
+
+}
+  
+  catch(e){
+    console.log(e)
+  }
+
     },
 
     displayComponent() {
@@ -147,7 +145,7 @@ export default {
     },
     hideComponent() {
       this.isActive = true
-    }
+    },
   },
 }
 </script>

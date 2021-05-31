@@ -1,5 +1,6 @@
 <template>
   <div id="main">
+    <Nav />
     <h1>Test site</h1>
     <playlist />
   </div>
