@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="signIn()" class="form">
+  <form v-on:submit.prevent="signIn()" class="form card">
     <div class="fields-container">
       <div class="">
         <label for="exampleInputEmail1" class="label">Email address</label>
@@ -39,8 +39,9 @@
     <div class="button-container">
       <button
         type="submit"
+        id="global-button"
         class="btn btn-primary"
-        v-bind:class="{ btnActivated: email.length > 0 && password.length > 0 }"
+        v-bind:class="{ globalBtnActive: email.length > 0 && password.length > 0, globalBtnInactive: email.length == 0 || password.length == 0 }"
       >
         LOGIN
       </button>
@@ -179,14 +180,16 @@ input {
 .btn {
   width: 10rem;
   height: 3rem;
-  font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-size: 20px;
-  background-color: #17a3b8ce;
   border: none;
 }
 
+.btn:hover {
+  background: ;
+}
+
 .btnActivated {
-  background-color: #17a2b8;
+  
 }
 </style>

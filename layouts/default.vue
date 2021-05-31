@@ -27,39 +27,42 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
+h1, h2, h4, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+p, input {
+  font-family: 'Lato', sans-serif;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.card {
+  background-color: #1E1133;
+  border: solid white 1px;
+  border-radius: 0.2rem;
+  color: white
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+body {
+  background-color: #271642;
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.globalBtnActive {
+  background-color: #17A2B8;
+  color: white;
+  font-family: 'Lato', sans-serif;
+}
+
+.globalBtnActive:hover {
+  background-color: #17A2B8;
+}
+
+.globalBtnInactive {
+  background-color: #17A2B89E;
+  /* #106B79 */
+  font-family: 'Lato', sans-serif;
+}
+
+.globalBtnInactive:hover {
+  background-color: #17A2B89E;
 }
 </style>
