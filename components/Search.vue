@@ -36,8 +36,9 @@
           <span class="author">{{ result.album_name }}</span>
           <button @click="play(result.audio)">&#9658; Play Sample</button>
 
-          <Popupmodal />
-
+<b-button @click="addTrack(result)">
+add to library
+</b-button>
           <audio>
             <source v-bind:src="result.audio" />
           </audio>
@@ -116,6 +117,27 @@ export default {
       }
       this.audio = new Audio(s)
       this.audio.play()
+    },
+    addTrack:  function(t) {
+  try {
+    let ref = this.results;
+   
+    for (var key in ref) {
+    var obj = ref[key].album_name;
+           this.$fire.firestore.collection("test").doc("GJhjnGSWINKcHjMsnUrj").set({
+         track: obj
+         
+       })
+             console.log('added:', obj);
+
+}
+
+}
+  
+  catch(e){
+    console.log(e)
+  }
+
     },
 
     displayComponent() {
