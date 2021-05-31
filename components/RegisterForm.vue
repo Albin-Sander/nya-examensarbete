@@ -1,7 +1,7 @@
 <template>
-  <form v-on:submit.prevent="registerUser()" class="form">
+  <form v-on:submit.prevent="registerUser()" class="form card">
     <div class="fields-container">
-      <div class="credentials-field">
+      <div class="credentials-fields">
         <div class="form-group">
           <label for="exampleInputEmail1" class="label">Email address</label>
           <input
@@ -9,7 +9,6 @@
             v-model="email"
             class="form-control"
             id="exampleInputEmail1"
-            aria-describedby="emailHelp"
             placeholder="Enter email"
             required
           />
@@ -69,13 +68,17 @@
     <div class="button-container">
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn"
         v-bind:class="{
-          btnActivated:
+          globalBtnActive:
             email.length > 0 &&
             password.length > 0 &&
             userName.length > 0 &&
             passwordMatch.length > 0,
+          globalBtnInactive: email.length == 0 ||
+            password.length == 0 ||
+            userName.length == 0 ||
+            passwordMatch.length == 0,
         }"
       >
         Submit
@@ -209,39 +212,66 @@ input {
   border-radius: 0.2rem;
 }
 
+.form-group {
+  margin-bottom: 0.4rem;
+}
+
 .fields-container {
-  height: 65%;
+  height: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+}
+
+.credentials-fields {
+  height: 9rem;
+}
+
+.password-fields {
+  height: 9rem;
 }
 
 .credentials-taken {
-  color: #00dcff;
+  color: white;
 }
 
 .contain-errormsg {
   height: 4rem;
 }
 
-.credentials-field {
-}
-
-.password-fields {
-}
-
 .label {
   background-color: #1e1133;
-  color: white;
-  margin: 0px;
-  margin-bottom: -3rem;
-  margin-top: -0.8rem;
-  position: fixed;
+  color: #00ddff;
+  margin-bottom: -11px;
+  position: relative;
+  display: table;
   margin-left: 0.8rem;
+  z-index: 2;
 }
 
 .form-control {
   background-color: #1e1133;
+  z-index: 1;
+}
+
+.form-control:focus,
+.form-control:active,
+text-area:focus,
+text-area:active,
+input:focus,
+input:active {
+  box-shadow: none;
+  outline: 0;
+  outline-style: none;
+}
+
+button.active.focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+button:active:focus,
+button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .link {
@@ -258,7 +288,7 @@ input {
   display: flex;
   width: 100%;
   justify-content: center;
-  height: 35%;
+  height: 30%;
   align-items: center;
 }
 
@@ -268,11 +298,7 @@ input {
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-size: 20px;
-  background-color: #17a3b8ce;
   border: none;
 }
 
-.btnActivated {
-  background-color: #17a2b8;
-}
 </style>

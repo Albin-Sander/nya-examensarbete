@@ -2,35 +2,39 @@
   <form v-on:submit.prevent="signIn()" class="form card">
     <div class="fields-container">
       <div class="">
-        <label for="exampleInputEmail1" class="label">Email address</label>
+        <label class="label">Email address</label>
         <input
           type="email"
           v-model="email"
           class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
+          v-bind:class="{
+                wrong: couldNotFindUser == true,
+          }"
           placeholder="Enter email"
           required
         />
       </div>
       <div class="specific-padding">
-        <label for="exampleInputPassword1" class="label">Password</label>
+        <label class="label">Password</label>
         <input
           type="password"
           v-model="password"
           class="form-control"
+          v-bind:class="{
+                wrong: passwordDoesNotMatch == true,
+          }"
           id="exampleInputPassword1"
           placeholder="Password"
           required
         />
         <div v-if="passwordDoesNotMatch">
-          <p class="credentials-taken">Password does not match!</p>
+          <p class="credentials-taken">Wrong password!</p>
         </div>
         <div v-if="couldNotFindUser">
-          <p class="credentials-taken">Password does not match!</p>
+          <p class="credentials-taken">Could not a find a user with that email!</p>
         </div>
         <div class="">
-          <NuxtLink class="link" to="/signup/registration"
+          <NuxtLink class="link" to="/login/registration"
             >Create new account</NuxtLink
           >
         </div>
@@ -40,7 +44,7 @@
       <button
         type="submit"
         id="global-button"
-        class="btn btn-primary"
+        class="btn"
         v-bind:class="{ globalBtnActive: email.length > 0 && password.length > 0, globalBtnInactive: email.length == 0 || password.length == 0 }"
       >
         LOGIN
@@ -77,12 +81,13 @@ export default {
           .catch((error) => {
             if (error.code == 'auth/wrong-password') {
               // Do this
-              return (vm.passwordDoesNotMatch = true)
+              return (vm.passwordDoesNotMatch = true, vm.couldNotFindUser = false)
             } else if (error.code == 'auth/user-not-found') {
               // Do that
-              return (vm.couldNotFindUser = true)
+              return (vm.couldNotFindUser = true, vm.passwordDoesNotMatch = false)
             } else {
               console.log(error.code)
+              return (vm.couldNotFindUser = false, vm.passwordDoesNotMatch = false)
             }
             // "auth/wrong-password"
             // "auth/user-not-found"
@@ -116,7 +121,17 @@ export default {
 
 input {
   color: white;
+  z-index: 1;
 }
+
+input:active {
+  border: solid white 1px
+}
+
+.wrong {
+  border: solid rgb(255, 0, 0) 1px;
+}
+
 
 .form {
   color: white;
@@ -124,7 +139,7 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 18rem;
+  height: 20rem;
   width: 70%;
   max-width: 20rem;
   padding: 1rem;
@@ -134,7 +149,7 @@ input {
 .fields-container {
   display: flex;
   flex-direction: column;
-  height: 55%;
+  height: 60%;
 }
 
 .specific-padding {
@@ -143,16 +158,30 @@ input {
 
 .label {
   background-color: #1e1133;
-  color: white;
-  margin: 0px;
-  margin-bottom: -3rem;
-  margin-top: -0.8rem;
-  position: fixed;
+  color: #00ddff;
+  margin-bottom: -11px;
+  position: relative;
+  display: table;
   margin-left: 0.8rem;
+  z-index: 2;
 }
 
 .form-control {
   background-color: #1e1133;
+  z-index: 1;
+}
+
+.form-control:focus, .form-control:active, text-area:focus, text-area:active, input:focus, input:active {
+  box-shadow: none;
+  outline: 0;
+  outline-style: none;
+}
+
+button.active.focus, button.active:focus,
+button.focus, button:active.focus, 
+button:active:focus, button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .credentials-taken {
@@ -172,7 +201,7 @@ input {
 .button-container {
   display: flex;
   width: 100%;
-  height: 45%;
+  height: 40%;
   justify-content: center;
   padding-top: 2rem;
 }
@@ -183,13 +212,5 @@ input {
   font-weight: 900;
   font-size: 20px;
   border: none;
-}
-
-.btn:hover {
-  background: ;
-}
-
-.btnActivated {
-  
 }
 </style>
