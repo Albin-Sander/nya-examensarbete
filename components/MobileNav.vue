@@ -85,7 +85,7 @@ export default {
 
 .navbar-mobile {
   position: fixed;
-  display: hidden;
+  display: none;
   align-items: center;
   justify-content: center;
   height: 3rem;
