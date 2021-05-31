@@ -2,6 +2,7 @@
   <div>
     <Nav />
     <Nuxt />
+    <LazyMobileNav />
   </div>
 </template>
 
