@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="registerUser()" class="form">
+  <form v-on:submit.prevent="registerUser()" class="form card">
     <div class="fields-container">
       <div class="credentials-field">
         <div class="form-group">
@@ -222,12 +222,6 @@ input {
 
 .contain-errormsg {
   height: 4rem;
-}
-
-.credentials-field {
-}
-
-.password-fields {
 }
 
 .label {

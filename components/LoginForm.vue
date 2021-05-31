@@ -7,8 +7,9 @@
           type="email"
           v-model="email"
           class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
+          v-bind:class="{
+                wrong: couldNotFindUser == true,
+          }"
           placeholder="Enter email"
           required
         />
@@ -19,6 +20,9 @@
           type="password"
           v-model="password"
           class="form-control"
+          v-bind:class="{
+                wrong: passwordDoesNotMatch == true,
+          }"
           id="exampleInputPassword1"
           placeholder="Password"
           required
@@ -30,7 +34,7 @@
           <p class="credentials-taken">Password does not match!</p>
         </div>
         <div class="">
-          <NuxtLink class="link" to="/signup/registration"
+          <NuxtLink class="link" to="/login/registration"
             >Create new account</NuxtLink
           >
         </div>
@@ -118,13 +122,22 @@ input {
   color: white;
 }
 
+input:active {
+  border: solid white 1px
+}
+
+.wrong {
+  border: solid rgb(255, 0, 0) 1px;
+}
+
+
 .form {
   color: white;
   background-color: #1e1133;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 18rem;
+  height: 20rem;
   width: 70%;
   max-width: 20rem;
   padding: 1rem;
@@ -134,7 +147,7 @@ input {
 .fields-container {
   display: flex;
   flex-direction: column;
-  height: 55%;
+  height: 60%;
 }
 
 .specific-padding {
@@ -144,15 +157,16 @@ input {
 .label {
   background-color: #1e1133;
   color: white;
-  margin: 0px;
-  margin-bottom: -3rem;
-  margin-top: -0.8rem;
-  position: fixed;
+  margin-bottom: -11px;
+  position: relative;
+  display: table;
   margin-left: 0.8rem;
+  z-index: 2;
 }
 
 .form-control {
   background-color: #1e1133;
+  z-index: 1;
 }
 
 .credentials-taken {
@@ -172,7 +186,7 @@ input {
 .button-container {
   display: flex;
   width: 100%;
-  height: 45%;
+  height: 40%;
   justify-content: center;
   padding-top: 2rem;
 }
@@ -183,13 +197,5 @@ input {
   font-weight: 900;
   font-size: 20px;
   border: none;
-}
-
-.btn:hover {
-  background: ;
-}
-
-.btnActivated {
-  
 }
 </style>
