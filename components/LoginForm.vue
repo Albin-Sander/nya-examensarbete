@@ -44,7 +44,7 @@
       <button
         type="submit"
         id="global-button"
-        class="btn btn-primary"
+        class="btn"
         v-bind:class="{ globalBtnActive: email.length > 0 && password.length > 0, globalBtnInactive: email.length == 0 || password.length == 0 }"
       >
         LOGIN
@@ -157,7 +157,7 @@ input:active {
 
 .label {
   background-color: #1e1133;
-  color: white;
+  color: #00ddff;
   margin-bottom: -11px;
   position: relative;
   display: table;
@@ -174,6 +174,13 @@ input:active {
   box-shadow: none;
   outline: 0;
   outline-style: none;
+}
+
+button.active.focus, button.active:focus,
+button.focus, button:active.focus, 
+button:active:focus, button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .credentials-taken {
@@ -204,5 +211,6 @@ input:active {
   font-weight: 900;
   font-size: 20px;
   border: none;
+  color: white
 }
 </style>
