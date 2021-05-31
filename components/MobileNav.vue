@@ -77,9 +77,15 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 770px) {
+  .navbar-mobile {
+    display: flex;
+  }
+}
+
 .navbar-mobile {
   position: fixed;
-  display: flex;
+  display: hidden;
   align-items: center;
   justify-content: center;
   height: 3rem;
