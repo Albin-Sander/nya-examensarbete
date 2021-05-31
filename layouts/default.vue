@@ -24,8 +24,17 @@ html {
   box-sizing: border-box;
 }
 
+h1, h2, h4, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+p, input {
+  font-family: 'Lato', sans-serif;
+}
+
 .card {
   background-color: #1E1133;
+  border: solid white 1px;
   border-radius: 0.2rem;
   color: white
 }
@@ -34,43 +43,23 @@ body {
   background-color: #271642;
 }
 
-button {
+.globalBtnActive {
   background-color: #17A2B8;
-  color: white
-}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
+  color: white;
+  font-family: 'Lato', sans-serif;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+.globalBtnActive:hover {
+  background-color: #17A2B8;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.globalBtnInactive {
+  background-color: #17A2B89E;
+  /* #106B79 */
+  font-family: 'Lato', sans-serif;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.globalBtnInactive:hover {
+  background-color: #17A2B89E;
 }
 </style>
