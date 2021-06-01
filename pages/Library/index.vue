@@ -1,7 +1,7 @@
 <template>
   <div class="library">
     <header>
-      <ul class="playlists-container">
+      <ul class="playlists-grid">
         <!--<li class="" v-for="playlist in userPlaylists" :key="playlist.name">
           <article class="playlist-preview card"></article>
           <footer class="playlist-info">
@@ -9,28 +9,40 @@
             <p class="mini-text">{{ playlist.author }}</p>
           </footer>
         </li>-->
-        <li class="">
+        <li class="playlist-item">
+          <article class="playlist-preview card">
+              <ul class="playlist-tracks">
+                  <li class="playlist-track">
+                      <div class="play"></div>
+                      <div class="track-info-container">
+                          <p class="track-info">Levels</p>
+                          <p class="track-info">Avicii </p>
+                      </div>
+                  </li>
+                  <li class="playlist-track"></li>
+                  <li class="playlist-track"></li>
+              </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item">
           <article class="playlist-preview card"></article>
           <footer class="playlist-info">
             <p class="mini-text">Avicii 2018</p>
             <p class="mini-text">David Andersen</p>
           </footer>
         </li>
-        <li class="">
+        <li class="playlist-item">
           <article class="playlist-preview card"></article>
           <footer class="playlist-info">
             <p class="mini-text">Avicii 2018</p>
             <p class="mini-text">David Andersen</p>
           </footer>
         </li>
-        <li class="">
-          <article class="playlist-preview card"></article>
-          <footer class="playlist-info">
-            <p class="mini-text">Avicii 2018</p>
-            <p class="mini-text">David Andersen</p>
-          </footer>
-        </li>
-        <li class="">
+        <li class="playlist-item">
           <article class="playlist-preview card"></article>
           <footer class="playlist-info">
             <p class="mini-text">Avicii 2018</p>
@@ -108,13 +120,7 @@ header {
   padding: 1rem;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  padding-top: 0.5rem;
-}
-
-li {
+.playlist-item {
   list-style: none;
   height: 10rem;
   width: 9rem;
@@ -124,13 +130,18 @@ li {
   align-items: center;
 }
 
-.playlists-container {
+.playlists-grid {
   display: grid;
   justify-content: space-around;
   align-items: center;
   grid-row-gap: 1.5rem;
   grid-column-gap: 1rem;
   grid-template-columns: repeat(2, auto);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 0.5rem;
+  list-style: none;
 }
 
 .playlist-preview {
@@ -139,6 +150,43 @@ li {
   background-color: white;
   list-style: none;
   margin: 0px;
+}
+
+.playlist-tracks {
+    height: 100%;
+    background-color: gray;
+    margin: 0px;
+    margin-top: auto;
+    list-style: none;
+    padding-left: 0;
+    padding: 0.5rem;
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: repeat(1, auto);
+}
+
+.playlist-track {
+    height: 2rem;
+    width: 100%;
+    background-color: red;
+    display: flex;
+}
+
+.play {
+    background-color: yellow;
+    height: 100%;
+    width: 2.5rem;
+}
+
+.track-info-container {
+    display: flex;
+    padding-left: 0.2rem;
+    flex-direction: column;
+}
+
+.track-info {
+    margin: 0;
+    font-size: 10px;
 }
 
 .playlist-info {
