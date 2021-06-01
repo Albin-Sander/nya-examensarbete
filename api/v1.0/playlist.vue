@@ -47,7 +47,7 @@ export default {
           '-' +
           ('0' + new Date().getMonth()).slice(-2) +
           '-' +
-          31
+          30
       }
 
       // if (yesterday[8] && yesterday[9] == 0) {
