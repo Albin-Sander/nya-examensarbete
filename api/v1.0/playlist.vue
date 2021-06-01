@@ -27,6 +27,12 @@ export default {
   methods: {
     getPlaylist() {
       var vm = this
+      let yesterday =
+        new Date().getFullYear() +
+        '-' +
+        ('0' + (new Date().getMonth() + 1)).slice(-2) +
+        '-' +
+        ('0' + (new Date().getDate() - 1)).slice(-2)
 
       let today =
         new Date().getFullYear() +
@@ -34,12 +40,20 @@ export default {
         ('0' + (new Date().getMonth() + 1)).slice(-2) +
         '-' +
         ('0' + new Date().getDate()).slice(-2)
-      let yesterday =
-        new Date().getFullYear() +
-        '-' +
-        ('0' + (new Date().getMonth() + 1)).slice(-2) +
-        '-' +
-        ('0' + (new Date().getDate() - 1)).slice(-2)
+
+      if (today[9] == 1 && today[8] == 0) {
+        yesterday =
+          new Date().getFullYear() +
+          '-' +
+          ('0' + new Date().getMonth()).slice(-2) +
+          '-' +
+          31
+      }
+
+      // if (yesterday[8] && yesterday[9] == 0) {
+      //   yesterday[8] = 3
+      // }
+
       console.log(today)
       console.log(yesterday)
 
