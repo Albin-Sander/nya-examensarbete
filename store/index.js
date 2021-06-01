@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export const state = () => ({
   credentialsExist: false,
+  userLibrary: {}
 })
 
 export const mutations = {
@@ -14,6 +15,10 @@ export const mutations = {
   setCredentialsDoesNotExist(state) {
     state.credentialsExist = false
   },
+  setUserLibrary(state, payload) {
+    state.userLibrary = payload.library
+    console.log(payload.library)
+  }
 }
 
 export const actions = {
@@ -70,10 +75,14 @@ export const actions = {
 
   async getUserLibrary(context, param) {
     try {
-      const ref = this.$fire.firestore.collection('user')
+      console.log("hi")
+      const ref = this.$fire.firestore.collection('users')
       const snapshot = await ref.where('email', '==', param.email).get()
-      snapshot.forEach(doc => {
+      let result = 
+      await snapshot.forEach(doc => {
         console.log(doc.data());
+        result = doc.data()
+        context.commit("setUserLibrary", result)
       });
     } catch (e) {
       console.log(e)
@@ -81,43 +90,3 @@ export const actions = {
   },
 }
 
-// async newUser(context, params) {
-//   return (
-//     new Promise( async (resolve, reject) => {
-//       const matchingEmails = await ref
-//         .where('email', '==', params.email)
-//         .get()
-//       const matchingUserNames = await ref
-//         .where('displayName', '==', params.userName)
-//         .get()
-//       if (matchingEmails.empty && matchingUserNames.empty) {
-//         console.log('No matching documents')
-//       } else {
-//         cancelOperation = true
-//         console.log('Found matching documents')
-//         throw error
-//       }
-
-//       try {
-//         // Checks have been resolved and should work, test additionaly
-//         if (!cancelOperation) {
-//           console.log(cancelOperation)
-//           console.log(params)
-//           const data = {
-//             email: params.email,
-//             displayName: params.userName,
-//             library: { likedTracks: [], likedPlaylists: {}, playlists: {} },
-//           }
-//           await ref.add(data)
-//         } else {
-//           return alert('username or email is already taken')
-//         }
-//       } catch (e) {
-//         return Promise.reject(e)
-//       }
-//     }),
-//     (error) => {
-//       reject(error)
-//     }
-//   )
-// },
