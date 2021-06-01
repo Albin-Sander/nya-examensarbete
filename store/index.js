@@ -28,7 +28,7 @@ export const actions = {
     console.log('--------------------------------------')
     const ref = await this.$fire.firestore.collection('users')
 
-    // This a action that checks if the credentials already exist or not without actually 
+    // This a action that checks if the credentials already exist or not without actually
     // writing anything to firestore, this is to prevent creating a user object in firestore
     // incase the firebase auth throws "weak password" error upon calling createUser function
 
@@ -52,7 +52,7 @@ export const actions = {
     try {
       console.log(context.state.credentialsExist)
       if (!context.state.credentialsExist) {
-        console.log("Inside if in addNewUser action")
+        console.log('Inside if in addNewUser action')
         console.log(params)
         const data = {
           email: params.email,
@@ -65,6 +65,18 @@ export const actions = {
       }
     } catch (e) {
       return Promise.reject(e)
+    }
+  },
+
+  async getUserLibrary(context, param) {
+    try {
+      const ref = this.$fire.firestore.collection('user')
+      const snapshot = await ref.where('email', '==', param.email).get()
+      snapshot.forEach(doc => {
+        console.log(doc.data());
+      });
+    } catch (e) {
+      console.log(e)
     }
   },
 }
