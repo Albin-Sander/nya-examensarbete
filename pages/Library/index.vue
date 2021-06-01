@@ -1,5 +1,51 @@
 <template>
-  <h1>Secret</h1>
+  <div class="library">
+    <header>
+      <ul class="playlists-container">
+        <!--<li class="" v-for="playlist in userPlaylists" :key="playlist.name">
+          <article class="playlist-preview card"></article>
+          <footer class="playlist-info">
+            <p class="mini-text">{{ playlist.name }}</p>
+            <p class="mini-text">{{ playlist.author }}</p>
+          </footer>
+        </li>-->
+        <li class="">
+          <article class="playlist-preview card"></article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="">
+          <article class="playlist-preview card"></article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="">
+          <article class="playlist-preview card"></article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="">
+          <article class="playlist-preview card"></article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <ul>
+        <li></li>
+      </ul>
+    </main>
+    <footer></footer>
+  </div>
 </template>
 
 <script>
@@ -7,12 +53,13 @@ import { mapActions } from 'vuex'
 export default {
   data: () => {
     return {
-        user: {},
-        library: {}
+      user: {},
+      likedTracks: [],
+      userPlaylists: {},
     }
   },
   methods: {
-      ...mapActions({
+    ...mapActions({
       getUserLibrary: 'getUserLibrary',
     }),
     async checkUser() {
@@ -33,10 +80,11 @@ export default {
       })
     },
     async getLibrary() {
-        let data = this.$store.state.userLibrary
-        this.library = data
-        console.log(data)
-    }
+      let data = this.$store.state.userLibrary
+      this.likedTracks = data.likedTracks
+      this.likedPlaylists = data.likedPlaylists
+      console.log(data)
+    },
   },
   computed: {
     //   async library() {
@@ -45,9 +93,87 @@ export default {
     //   }
   },
   mounted() {
-      this.checkUser()
-  }
+    this.checkUser()
+  },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.library {
+  height: 100vh;
+}
+
+header {
+  background-color: transparent;
+  padding: 1rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  padding-top: 0.5rem;
+}
+
+li {
+  list-style: none;
+  height: 10rem;
+  width: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.playlists-container {
+  display: grid;
+  justify-content: space-around;
+  align-items: center;
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 1rem;
+  grid-template-columns: repeat(2, auto);
+}
+
+.playlist-preview {
+  height: 80%;
+  width: 100%;
+  background-color: white;
+  list-style: none;
+  margin: 0px;
+}
+
+.playlist-info {
+  height: 20%;
+  width: 97%;
+  padding-top: 0.2rem;
+  background-color: transparent;
+}
+
+.mini-text {
+  margin: 0px;
+  font-size: 11px;
+  color: #00ddff;
+}
+
+main {
+  height: 50%;
+  background-color: black;
+}
+
+footer {
+  height: 10%;
+  background-color: gray;
+}
+
+@media only screen and (min-width: 500px) {
+  .playlists-container {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .playlist-preview {
+    width: 8rem;
+    height: 7rem;
+  }
+}
+</style>
