@@ -91,7 +91,7 @@ export default {
 
   methods: {
     ...mapActions({
-      checkFunction:'checkUserExists'
+      saveTrack:'saveTrack'
     }),
     
     search: function () {
@@ -120,7 +120,7 @@ export default {
       this.audio = new Audio(s)
       this.audio.play()
     },
-    addTrack: async function (param) {
+    addTrack: async function (trackId) {
       /* try {
         let ref = this.results
 
@@ -142,10 +142,11 @@ export default {
 
         if (user) {
           console.log("hej")
-          for(var track in vm.results){
-            if(vm.results[track].id == param) {
-              
-            console.log(vm.results[track])
+          for(var index in vm.results){
+            if(vm.results[index].id == trackId) {
+              const email = user.email
+              const track = vm.results[index]
+              vm.saveTrack({email, track})
             //   console.log(track)
             // }
             // var obj =  vm.results[track].album_name
@@ -153,9 +154,11 @@ export default {
           }
           //vm.checkFunction(user.email)
          
-        }} /*else {
+        }
+        }else {
+          console.log('you need to be logged in')
           return (window.location.href = '/login')
-        }*/
+        }
 
 
       })
