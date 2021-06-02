@@ -82,26 +82,44 @@ export const actions = {
         });
         return console.log("Added track")
       }
-      for(var index in trackList) {
-        console.log("Hey")
-        if(trackList[index].id === payload.track.id) {
-            console.log("Found matching tracks")
-            console.log("-------------------")
-            console.log(trackList[index].id + ' ' +  payload.track.id)
-            return
-        // }
-        // var obj =  vm.results[track].album_name
-        // console.log(obj)
-        } else{
-          console.log("Hej")
-          console.log(payload.track)
-          trackList.push(payload.track);
-          const res = await ref.doc(doc.id).update({
-            'library.likedTracks': trackList
-          });
-          return
-        }
+      
+      let result = await trackList.filter(track => track.id == payload.track.id)
+      console.log(result)
+
+      if(result.length > 0) {
+        console.log("Found matching tracks")
+        console.log("-------------------")
+        console.log(result[0].id + ' ' +  payload.track.id)
+        return
+      } else {
+        console.log("In the else")
+        trackList.push(payload.track);
+        const res = await ref.doc(doc.id).update({
+          'library.likedTracks': trackList
+        });
+        return
       }
+      // for(var index in trackList) {
+      //   console.log(trackList[index].id)
+      //   console.log(payload.track.id)
+      //   if(trackList[index].id === payload.track.id) {
+      //       console.log("Found matching tracks")
+      //       console.log("-------------------")
+      //       console.log(trackList[index].id + ' ' +  payload.track.id)
+      //       return
+      //   // }
+      //   // var obj =  vm.results[track].album_name
+      //   // console.log(obj)
+      //   } else{
+      //     console.log("Hej")
+      //     console.log(payload.track)
+      //     trackList.push(payload.track);
+      //     const res = await ref.doc(doc.id).update({
+      //       'library.likedTracks': trackList
+      //     });
+      //     return
+      //   }
+      // }
     })
   }
 }
