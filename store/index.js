@@ -67,6 +67,22 @@ export const actions = {
       return Promise.reject(e)
     }
   },
+  async checkUserExists(context, params) {
+    console.log(params)
+    const ref = await this.$fire.firestore.collection('users');
+    const matchingEmails = await ref.where('email', '==', params).get()
+    /*try{
+      if(matchingEmails){
+        await ref.update({
+          "library.playlists": "test"
+        })
+        console.log(matchingEmails)
+      }
+
+    } catch (e) {
+      return Promise.reject(e)
+    }*/
+  }
 }
 
 // async newUser(context, params) {
