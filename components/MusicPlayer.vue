@@ -16,21 +16,16 @@
 </template>
 
 <script>
-import playButton from '/assets/playbutton.svg'
-import pauseButton from '/assets/pauseButton.svg'
 export default {
   data() {
-    return {
-      playButton: playButton,
-      pauseButton: pauseButton,
-    }
+    return {}
   },
 }
 </script>
 
 <style scoped>
 audio {
-  background-color: white;
+  background-color: blue !important;
   border-radius: 2rem;
   width: 50rem;
   margin-bottom: 5rem;
