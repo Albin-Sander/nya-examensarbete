@@ -79,87 +79,88 @@
     </header>
     <main>
       <ul class="track-list">
-        <!--  v-for="track in likedTracks" :key="track.name" -->
-        <li class="">
-          <div class="play"></div>
+        <!-- <li class="track-container" v-for="track in likedTracks" :key="track.id">
+                <div class="music-icon"></div>
+                <div class="track-info">
+                  <p class="mini-text-track">{{track.name}}</p>
+                  <p class="mini-text-author">{{track.artist_name}}</p>
+                </div>
+              </li>  -->
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
+        <li class="track-container">
+          <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
+            <p class="mini-text-track">Sunshine</p>
+            <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-         <li class="">
-          <div class="play"></div>
-          <div class="track-info">
-            <p class="mini-text">Sunshine</p>
-            <p class="mini-text">Avicii</p>
-          </div>
-        </li>
+        
+
       </ul>
     </main>
-    <footer> </footer>
+    <footer></footer>
   </div>
 </template>
 
@@ -221,6 +222,7 @@ export default {
 header {
   background-color: transparent;
   padding: 1rem;
+  min-height: 14rem;
 }
 
 .playlist-item {
@@ -322,13 +324,47 @@ header {
   padding-top: 0.5rem;
 }
 
+.track-container {
+  margin: 0 0 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.322);
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.music-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  background-image: url('~@/assets/library/vinyl-icon.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .track-info {
-  border-bottom: 1px solid white;
-  height: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+.mini-text-author {
+  color: white;
+  margin: 0px;
+  font-size: 11px;
+}
+
+.track-info-seperator {
+  color: white;
+  padding-left: 0.5rem;
+  margin: 0px
+}
+
+.mini-text-track {
+  color: white;
+  margin: 0px
 }
 
 main {
-  height: 50%;
   background-color: transparent;
   padding: 1rem;
   display: flex;
@@ -359,6 +395,5 @@ footer {
 }
 
 @media only screen and (max-width: 768px) {
-  
 }
 </style>
