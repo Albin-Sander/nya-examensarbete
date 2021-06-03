@@ -2,14 +2,31 @@
   <div class="library">
     <header>
       <ul class="playlists-grid">
-        <!--<li class="" v-for="playlist in userPlaylists" :key="playlist.name">
-          <article class="playlist-preview card"></article>
+        <li
+          class="playlist-item"
+          v-for="playlist in userPlaylists"
+          :key="playlist.name"
+        >
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
           <footer class="playlist-info">
             <p class="mini-text">{{ playlist.name }}</p>
             <p class="mini-text">{{ playlist.author }}</p>
           </footer>
-        </li>-->
-        <li class="playlist-item">
+        </li>
+
+        <!-- v-for ends here -->
+
+        <!--<li class="playlist-item" @click="newPlaylist()">
           <article class="playlist-preview card">
             <ul class="playlist-tracks">
               <li class="playlist-track">
@@ -39,58 +56,40 @@
             <p class="mini-text">Avicii 2018</p>
             <p class="mini-text">David Andersen</p>
           </footer>
-        </li>
+        </li>-->
         <li class="playlist-item">
-          <article class="playlist-preview card"></article>
+          <article class="playlist-preview card">
+            <button class="add-playlist-btn"></button>
+            <div class="add-playlist-title">
+              <h5>Add</h5>
+              <h5>Playlist</h5>
+            </div>
+          </article>
           <footer class="playlist-info">
             <p class="mini-text">Avicii 2018</p>
             <p class="mini-text">David Andersen</p>
           </footer>
         </li>
-        <li class="playlist-item">
+        <!--<li class="playlist-item">
           <article class="playlist-preview card"></article>
           <footer class="playlist-info">
             <p class="mini-text">Avicii 2018</p>
             <p class="mini-text">David Andersen</p>
           </footer>
-        </li>
-        <li class="playlist-item">
-          <article class="playlist-preview card"></article>
-          <footer class="playlist-info">
-            <p class="mini-text">Avicii 2018</p>
-            <p class="mini-text">David Andersen</p>
-          </footer>
-        </li>
-        <li class="playlist-item">
-          <article class="playlist-preview card"></article>
-          <footer class="playlist-info">
-            <p class="mini-text">Avicii 2018</p>
-            <p class="mini-text">David Andersen</p>
-          </footer>
-        </li>
-        <li class="playlist-item">
-          <article class="playlist-preview card"></article>
-          <footer class="playlist-info">
-            <p class="mini-text">Avicii 2018</p>
-            <p class="mini-text">David Andersen</p>
-          </footer>
-        </li>
+        </li>-->
       </ul>
     </header>
     <main>
       <ul class="track-list">
-        <!-- <li class="track-container" v-for="track in likedTracks" :key="track.id">
-                <div class="music-icon"></div>
-                <div class="track-info">
-                  <p class="mini-text-track">{{track.name}}</p>
-                  <p class="mini-text-author">{{track.artist_name}}</p>
-                </div>
-              </li>  -->
-        <li class="track-container">
+        <li
+          class="track-container"
+          v-for="track in likedTracks"
+          :key="track.id"
+        >
           <div class="music-icon"></div>
           <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
+            <p class="mini-text-track">{{ track.name }}</p>
+            <p class="mini-text-author">{{ track.artist_name }}</p>
           </div>
         </li>
         <li class="track-container">
@@ -107,57 +106,6 @@
             <p class="mini-text-author">Avicii</p>
           </div>
         </li>
-        <li class="track-container">
-          <div class="music-icon"></div>
-          <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
-          </div>
-        </li>
-        <li class="track-container">
-          <div class="music-icon"></div>
-          <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
-          </div>
-        </li>
-        <li class="track-container">
-          <div class="music-icon"></div>
-          <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
-          </div>
-        </li>
-        <li class="track-container">
-          <div class="music-icon"></div>
-          <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
-          </div>
-        </li>
-        <li class="track-container">
-          <div class="music-icon"></div>
-          <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
-          </div>
-        </li>
-        <li class="track-container">
-          <div class="music-icon"></div>
-          <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
-          </div>
-        </li>
-        <li class="track-container">
-          <div class="music-icon"></div>
-          <div class="track-info">
-            <p class="mini-text-track">Sunshine</p>
-            <p class="mini-text-author">Avicii</p>
-          </div>
-        </li>
-        
-
       </ul>
     </main>
     <footer></footer>
@@ -177,6 +125,7 @@ export default {
   methods: {
     ...mapActions({
       getUserLibrary: 'getUserLibrary',
+      addNewPlaylist: 'addNewPlaylist',
     }),
     async checkUser() {
       let vm = this
@@ -200,6 +149,15 @@ export default {
       this.likedTracks = data.likedTracks
       this.likedPlaylists = data.likedPlaylists
       console.log(data)
+    },
+    async newPlaylist() {
+      let obj = {
+        email: this.user.email,
+        tracklist: [],
+        playlist: 'Newplaylist',
+      }
+      console.log(obj)
+      this.addNewPlaylist(obj)
     },
   },
   computed: {
@@ -356,12 +314,12 @@ header {
 .track-info-seperator {
   color: white;
   padding-left: 0.5rem;
-  margin: 0px
+  margin: 0px;
 }
 
 .mini-text-track {
   color: white;
-  margin: 0px
+  margin: 0px;
 }
 
 main {
