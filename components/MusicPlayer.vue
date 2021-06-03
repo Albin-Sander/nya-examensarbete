@@ -48,7 +48,7 @@ export default {
 
 <style scoped>
 audio {
-  background-color: blue !important;
+  background-color: blue;
   border-radius: 2rem;
   width: 50rem;
   margin-bottom: 5rem;
