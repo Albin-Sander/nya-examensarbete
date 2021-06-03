@@ -75,12 +75,10 @@ export const actions = {
 
   async getUserLibrary(context, param) {
     try {
-      console.log("hi")
       const ref = this.$fire.firestore.collection('users')
       const snapshot = await ref.where('email', '==', param.email).get()
       let result = 
       await snapshot.forEach(doc => {
-        console.log(doc.data());
         result = doc.data()
         context.commit("setUserLibrary", result)
       });
@@ -88,5 +86,27 @@ export const actions = {
       console.log(e)
     }
   },
+
+  async addNewPlaylist(context, param) {
+    try {
+      const ref = this.$fire.firestore.collection('users')
+      const snapshot = await ref.where('email', '==', param.email).get()
+      await snapshot.forEach(async doc => {
+        let data = doc.data()
+        console.log(data)
+        let playLists = data.library.playlists
+        console.log(playLists)
+        let playlistName = param.playlist
+        console.log(playlistName, param.tracklist)
+        playLists[playlistName] = param.tracklist
+        console.log(await playLists)
+        await ref.doc(doc.id).update({
+          'library.playlists': playLists
+        });
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
 }
 
