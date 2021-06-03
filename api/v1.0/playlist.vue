@@ -3,7 +3,10 @@
     <ul id="v-for-object">
       <li v-for="(value, index) in playLists" :key="index" class="list">
         <b-card :title="value.name" class="b-card-title text-center">
-          <b-button v-bind:href="value.shorturl" variant="primary"
+          <b-button
+            v-bind:href="value.shorturl"
+            target="_blank"
+            variant="primary"
             >Go to playlist <img src="~/assets/arrow-right_white.svg"
           /></b-button>
           <b-button v-bind:href="value.zip" variant="primary"
