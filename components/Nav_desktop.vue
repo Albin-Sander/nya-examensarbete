@@ -16,11 +16,11 @@
           <NuxtLink to="/login">Log in</NuxtLink>
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
           >Disabled</a
         >
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -29,9 +29,15 @@
 export default {}
 </script>
 
-<style>
+<style scoped>
 .nav-ul {
   display: none;
+  background-color: #271642;
+}
+
+a {
+  color: white;
+  font-size: 1.3rem;
 }
 
 @media only screen and (min-width: 770px) {

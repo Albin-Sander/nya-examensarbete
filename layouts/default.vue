@@ -1,16 +1,20 @@
 <template>
   <div>
     <Nav />
+
     <Nuxt />
+    <MusicPlayer />
+
     <LazyMobileNav />
   </div>
 </template>
 
 <script>
 import Nav from '../components/Nav_desktop'
+import MusicPlayer from '../components/MusicPlayer'
 
 export default {
-  components: { Nav },
+  components: { Nav, MusicPlayer },
 }
 </script>
 
@@ -27,45 +31,53 @@ html {
   box-sizing: border-box;
 }
 
-h1, h2, h4, h4, h5, h6 {
+h1,
+h2,
+h4,
+h4,
+h5,
+h6 {
   font-family: 'Montserrat', sans-serif;
 }
 
-p, input {
+p,
+input {
   font-family: 'Lato', sans-serif;
 }
 
 .card {
-  background-color: #1E1133;
+  background-color: #1e1133;
   border: solid white 1px;
   border-radius: 0.2rem;
-  color: white
+  color: white;
 }
 
 body {
   background-color: #271642;
+  display: flex;
+  justify-content: center;
 }
 
 .globalBtnActive {
-  background-color: #17A2B8;
+  background-color: #17a2b8;
   color: white;
   font-family: 'Lato', sans-serif;
 }
 
 .globalBtnActive:hover {
-  background-color: #17A2B8;
-  color:white
+  background-color: #17a2b8;
+  color: white;
 }
 
 .globalBtnInactive {
-  background-color: #17A2B89E;
+  background-color: #17a2b89e;
   /* #106B79 */
   font-family: 'Lato', sans-serif;
-  color:white
+  color: white;
 }
 
 .globalBtnInactive:hover {
-  background-color: #17A2B89E;
-  color:white
+  background-color: #17a2b89e;
+  color: white;
 }
 </style>
