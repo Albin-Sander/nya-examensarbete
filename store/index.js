@@ -5,11 +5,8 @@ Vue.use(Vuex)
 
 export const state = () => ({
   credentialsExist: false,
-
-  userLibrary: {}
-
+  userLibrary: {},
   music: '',
-
 })
 
 export const mutations = {
@@ -23,12 +20,11 @@ export const mutations = {
   setUserLibrary(state, payload) {
     state.userLibrary = payload.library
     console.log(payload.library)
-  }
+  },
 
   setMusic(state, { url }) {
     state.music = url
   },
-
 }
 
 export const actions = {
@@ -83,16 +79,14 @@ export const actions = {
     }
   },
 
-
   async getUserLibrary(context, param) {
     try {
       const ref = this.$fire.firestore.collection('users')
       const snapshot = await ref.where('email', '==', param.email).get()
-      let result = 
-      await snapshot.forEach(doc => {
+      let result = await snapshot.forEach((doc) => {
         result = doc.data()
-        context.commit("setUserLibrary", result)
-      });
+        context.commit('setUserLibrary', result)
+      })
     } catch (e) {
       console.log(e)
     }
@@ -102,7 +96,7 @@ export const actions = {
     try {
       const ref = this.$fire.firestore.collection('users')
       const snapshot = await ref.where('email', '==', param.email).get()
-      await snapshot.forEach(async doc => {
+      await snapshot.forEach(async (doc) => {
         let data = doc.data()
         console.log(data)
         let playLists = data.library.playlists
@@ -112,46 +106,46 @@ export const actions = {
         playLists[playlistName] = param.tracklist
         console.log(await playLists)
         await ref.doc(doc.id).update({
-          'library.playlists': playLists
-        });
+          'library.playlists': playLists,
+        })
       })
     } catch (e) {
       console.log(e)
     }
-  }
-}
-
+  },
 
   async saveTrack(context, payload) {
     console.log(payload)
-    const ref = await this.$fire.firestore.collection('users');
+    const ref = await this.$fire.firestore.collection('users')
     const snapshot = await ref.where('email', '==', payload.email).get()
-    let result = await snapshot.forEach(async doc =>  {
+    let result = await snapshot.forEach(async (doc) => {
       let data = doc.data()
       console.log(data)
       let trackList = data.library.likedTracks
-      if(trackList.length == 0) {
+      if (trackList.length == 0) {
         trackList.push(payload.track)
         const res = await ref.doc(doc.id).update({
-          'library.likedTracks': trackList
-        });
-        return console.log("Added track")
+          'library.likedTracks': trackList,
+        })
+        return console.log('Added track')
       }
-      
-      let result = await trackList.filter(track => track.id == payload.track.id)
+
+      let result = await trackList.filter(
+        (track) => track.id == payload.track.id
+      )
       console.log(result)
 
-      if(result.length > 0) {
-        console.log("Found matching tracks")
-        console.log("-------------------")
-        console.log(result[0].id + ' ' +  payload.track.id)
+      if (result.length > 0) {
+        console.log('Found matching tracks')
+        console.log('-------------------')
+        console.log(result[0].id + ' ' + payload.track.id)
         return
       } else {
-        console.log("In the else")
-        trackList.push(payload.track);
+        console.log('In the else')
+        trackList.push(payload.track)
         const res = await ref.doc(doc.id).update({
-          'library.likedTracks': trackList
-        });
+          'library.likedTracks': trackList,
+        })
         return
       }
       // for(var index in trackList) {
@@ -176,6 +170,5 @@ export const actions = {
       //   }
       // }
     })
-  }
+  },
 }
-

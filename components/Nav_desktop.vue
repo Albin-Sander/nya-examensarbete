@@ -8,7 +8,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link">
-          <NuxtLink to="/login">Library</NuxtLink>
+          <NuxtLink to="/library">Library</NuxtLink>
         </a>
       </li>
       <li class="nav-item">
