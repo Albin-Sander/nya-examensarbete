@@ -71,45 +71,59 @@ export const actions = {
       return Promise.reject(e)
     }
   },
+  async saveTrack(context, payload) {
+    console.log(payload)
+    const ref = await this.$fire.firestore.collection('users');
+    const snapshot = await ref.where('email', '==', payload.email).get()
+    let result = await snapshot.forEach(async doc =>  {
+      let data = doc.data()
+      console.log(data)
+      let trackList = data.library.likedTracks
+      if(trackList.length == 0) {
+        trackList.push(payload.track)
+        const res = await ref.doc(doc.id).update({
+          'library.likedTracks': trackList
+        });
+        return console.log("Added track")
+      }
+      
+      let result = await trackList.filter(track => track.id == payload.track.id)
+      console.log(result)
+
+      if(result.length > 0) {
+        console.log("Found matching tracks")
+        console.log("-------------------")
+        console.log(result[0].id + ' ' +  payload.track.id)
+        return
+      } else {
+        console.log("In the else")
+        trackList.push(payload.track);
+        const res = await ref.doc(doc.id).update({
+          'library.likedTracks': trackList
+        });
+        return
+      }
+      // for(var index in trackList) {
+      //   console.log(trackList[index].id)
+      //   console.log(payload.track.id)
+      //   if(trackList[index].id === payload.track.id) {
+      //       console.log("Found matching tracks")
+      //       console.log("-------------------")
+      //       console.log(trackList[index].id + ' ' +  payload.track.id)
+      //       return
+      //   // }
+      //   // var obj =  vm.results[track].album_name
+      //   // console.log(obj)
+      //   } else{
+      //     console.log("Hej")
+      //     console.log(payload.track)
+      //     trackList.push(payload.track);
+      //     const res = await ref.doc(doc.id).update({
+      //       'library.likedTracks': trackList
+      //     });
+      //     return
+      //   }
+      // }
+    })
+  }
 }
-
-// async newUser(context, params) {
-//   return (
-//     new Promise( async (resolve, reject) => {
-//       const matchingEmails = await ref
-//         .where('email', '==', params.email)
-//         .get()
-//       const matchingUserNames = await ref
-//         .where('displayName', '==', params.userName)
-//         .get()
-//       if (matchingEmails.empty && matchingUserNames.empty) {
-//         console.log('No matching documents')
-//       } else {
-//         cancelOperation = true
-//         console.log('Found matching documents')
-//         throw error
-//       }
-
-//       try {
-//         // Checks have been resolved and should work, test additionaly
-//         if (!cancelOperation) {
-//           console.log(cancelOperation)
-//           console.log(params)
-//           const data = {
-//             email: params.email,
-//             displayName: params.userName,
-//             library: { likedTracks: [], likedPlaylists: {}, playlists: {} },
-//           }
-//           await ref.add(data)
-//         } else {
-//           return alert('username or email is already taken')
-//         }
-//       } catch (e) {
-//         return Promise.reject(e)
-//       }
-//     }),
-//     (error) => {
-//       reject(error)
-//     }
-//   )
-// },

@@ -3,16 +3,15 @@
     <div id="app-instasearch">
       <div class="input-container">
         <input
-        class="input-field"
+          class="input-field"
           @click="displayComponent"
           type="text"
           placeholder="search..."
           v-model="term"
-          
         />
         <b-button @click="search" type="button" class="btn btn-outline-primary"
           >Search
-          </b-button>
+        </b-button>
         <b-button
           v-bind:class="{ active: isActive }"
           @click="hideComponent"
@@ -29,27 +28,25 @@
         tag="ul"
         name="list-animation"
       >
-        <b-card class="mb-2" v-for="result in results" v-bind:key="result.id">
+        <b-card class="mb-2" v-for="result in results" :key="result.id">
           <!--create click function to share button-->
 
           <img v-bind:src="result.image" />
           <span class="author">{{ result.album_name }}</span>
           <button @click="play(result.audio)">&#9658; Play Sample</button>
 
-<b-button @click="addTrack(result)">
-add to library
-</b-button>
+          <b-button @click="addTrack(result.id)"> add to library </b-button>
           <audio>
             <source v-bind:src="result.audio" />
           </audio>
         </b-card>
-        
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex'
 import Popupmodal from './Popupmodal.vue'
 export default {
   components: { Popupmodal },
@@ -65,6 +62,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['credentialsExist']),
     filteredFeed: function () {
       var results = this.data
       var SearchString = this.SearchString
@@ -92,6 +90,10 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      saveTrack:'saveTrack'
+    }),
+    
     search: function () {
       let CLIENT_ID = process.env.clientId
       if (this.audio) {
@@ -118,28 +120,55 @@ export default {
       this.audio = new Audio(s)
       this.audio.play()
     },
-    addTrack:  function(t) {
-  try {
-    let ref = this.results;
-   
-    for (var key in ref) {
-    var obj = ref[key].album_name;
-           this.$fire.firestore.collection("test").doc("GJhjnGSWINKcHjMsnUrj").set({
-         track: obj
+    addTrack: async function (trackId) {
+      /* try {
+        let ref = this.results
+
+        for (var key in ref) {
+          var obj = ref[key].album_name
+          this.$fire.firestore
+            .collection('test')
+            .doc('GJhjnGSWINKcHjMsnUrj')
+            .set({
+              track: obj,
+            })
+          console.log('added:', obj)
+        }
+      } catch (e) {
+        console.log(e)
+      } */
+      let vm = this
+      await this.$fire.auth.onAuthStateChanged(async function (user) {
+
+        if (user) {
+          console.log("hej")
+          for(var index in vm.results){
+            if(vm.results[index].id == trackId) {
+              const email = user.email
+              const track = vm.results[index]
+              vm.saveTrack({email, track})
+            //   console.log(track)
+            // }
+            // var obj =  vm.results[track].album_name
+            // console.log(obj)
+          }
+          //vm.checkFunction(user.email)
          
-       })
-             console.log('added:', obj);
+        }
+        }else {
+          console.log('you need to be logged in')
+          return (window.location.href = '/login')
+        }
 
-}
 
-}
-  
-  catch(e){
-    console.log(e)
-  }
-
+      })
+      
+      
     },
+test (){
+        this.$store.dispatch('checkUserExists')
 
+},
     displayComponent() {
       this.isActive = false
     },
@@ -196,6 +225,8 @@ header h1 {
 }
 
 .input-container {
+  margin-right: 15%;
+
   border-radius: 5px;
   background: #1e1133;
   padding: 10px;
@@ -248,6 +279,9 @@ header h1 {
 .list-animation-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+#list-group {
+  padding-right: 15%;
 }
 
 .list-animation-leave-active {
