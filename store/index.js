@@ -5,7 +5,11 @@ Vue.use(Vuex)
 
 export const state = () => ({
   credentialsExist: false,
+
+  userLibrary: {}
+
   music: '',
+
 })
 
 export const mutations = {
@@ -15,9 +19,16 @@ export const mutations = {
   setCredentialsDoesNotExist(state) {
     state.credentialsExist = false
   },
+
+  setUserLibrary(state, payload) {
+    state.userLibrary = payload.library
+    console.log(payload.library)
+  }
+
   setMusic(state, { url }) {
     state.music = url
   },
+
 }
 
 export const actions = {
@@ -71,6 +82,46 @@ export const actions = {
       return Promise.reject(e)
     }
   },
+
+
+  async getUserLibrary(context, param) {
+    try {
+      const ref = this.$fire.firestore.collection('users')
+      const snapshot = await ref.where('email', '==', param.email).get()
+      let result = 
+      await snapshot.forEach(doc => {
+        result = doc.data()
+        context.commit("setUserLibrary", result)
+      });
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  async addNewPlaylist(context, param) {
+    try {
+      const ref = this.$fire.firestore.collection('users')
+      const snapshot = await ref.where('email', '==', param.email).get()
+      await snapshot.forEach(async doc => {
+        let data = doc.data()
+        console.log(data)
+        let playLists = data.library.playlists
+        console.log(playLists)
+        let playlistName = param.playlist
+        console.log(playlistName, param.tracklist)
+        playLists[playlistName] = param.tracklist
+        console.log(await playLists)
+        await ref.doc(doc.id).update({
+          'library.playlists': playLists
+        });
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+
+
   async saveTrack(context, payload) {
     console.log(payload)
     const ref = await this.$fire.firestore.collection('users');
@@ -127,3 +178,4 @@ export const actions = {
     })
   }
 }
+
