@@ -22,7 +22,6 @@
     >
       Click
     </button>
-    <button @click="this.test">test</button>
   </div>
 </template>
 
@@ -31,11 +30,7 @@ export default {
   data() {
     return {}
   },
-  methods: {
-    test() {
-      this.$refs.player.load()
-    },
-  },
+  methods: {},
   watch: {
     '$store.state.music'(value, oldValue) {
       console.log(value)
