@@ -26,7 +26,7 @@
 
         <!-- v-for ends here -->
 
-        <!--<li class="playlist-item" @click="newPlaylist()">
+        <li class="playlist-item">
           <article class="playlist-preview card">
             <ul class="playlist-tracks">
               <li class="playlist-track">
@@ -56,20 +56,591 @@
             <p class="mini-text">Avicii 2018</p>
             <p class="mini-text">David Andersen</p>
           </footer>
-        </li>-->
-        <li class="playlist-item">
+        </li> 
+
+        <!-- 
+        <li class="playlist-item" @click="newPlaylist()">
           <article class="playlist-preview card">
-            <button class="add-playlist-btn"></button>
-            <div class="add-playlist-title">
-              <h5>Add</h5>
-              <h5>Playlist</h5>
-            </div>
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
           </article>
           <footer class="playlist-info">
             <p class="mini-text">Avicii 2018</p>
             <p class="mini-text">David Andersen</p>
           </footer>
         </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li>
+        <li class="playlist-item" @click="newPlaylist()">
+          <article class="playlist-preview card">
+            <ul class="playlist-tracks">
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+              <li class="playlist-track">
+                <div class="play"></div>
+                <div class="track-info-container">
+                  <p class="track-preview-info">Levels</p>
+                  <p class="track-preview-info">Avicii</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+          <footer class="playlist-info">
+            <p class="mini-text">Avicii 2018</p>
+            <p class="mini-text">David Andersen</p>
+          </footer>
+        </li> -->
+        
+        <li class="playlist-item">
+          <article class="playlist-preview card">
+            <button class="add-playlist-btn globalBtnActive">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 0C9.29837 0 9.58452 0.118526 9.79549 0.329505C10.0065 0.540483 10.125 0.826631 10.125 1.125V7.875H16.875C17.1734 7.875 17.4595 7.99353 17.6705 8.20451C17.8815 8.41548 18 8.70163 18 9C18 9.29837 17.8815 9.58452 17.6705 9.79549C17.4595 10.0065 17.1734 10.125 16.875 10.125H10.125V16.875C10.125 17.1734 10.0065 17.4595 9.79549 17.6705C9.58452 17.8815 9.29837 18 9 18C8.70163 18 8.41548 17.8815 8.20451 17.6705C7.99353 17.4595 7.875 17.1734 7.875 16.875V10.125H1.125C0.826631 10.125 0.540483 10.0065 0.329505 9.79549C0.118526 9.58452 0 9.29837 0 9C0 8.70163 0.118526 8.41548 0.329505 8.20451C0.540483 7.99353 0.826631 7.875 1.125 7.875H7.875V1.125C7.875 0.826631 7.99353 0.540483 8.20451 0.329505C8.41548 0.118526 8.70163 0 9 0V0Z"
+                  fill="white"
+                />
+              </svg>
+            </button>
+            <div class="add-playlist-title-container">
+              <h5 class="add-playlist-title">Add new</h5>
+              <h5 class="add-playlist-title">Playlist</h5>
+            </div>
+          </article>
+          <footer class="playlist-info"></footer>
+        </li> -->
         <!--<li class="playlist-item">
           <article class="playlist-preview card"></article>
           <footer class="playlist-info">
@@ -170,6 +741,7 @@ export default {
     this.checkUser()
   },
 }
+// grid-template-columns: repeat(6, calc(50% - 40px));
 </script>
 
 <style scoped>
@@ -196,28 +768,28 @@ header {
 .playlists-grid {
   display: grid;
   align-items: center;
-  grid-row-gap: 1.5rem;
-  grid-column-gap: 1rem;
-  grid-template-columns: repeat(2, auto);
-  list-style: none;
   margin: 0;
   padding: 0;
   padding-top: 0.5rem;
   list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
   grid-auto-flow: column;
   grid-auto-columns: minmax(160px, 1fr);
   overflow-x: auto;
   overflow-y: clip;
-  grid-template-rows: 2;
   grid-template-rows: repeat(2, auto);
+  grid-gap: 0.3rem;
+  row-gap: 1.5rem;
+ 
 }
+
+
 
 .playlist-preview {
   height: 80%;
   width: 100%;
   list-style: none;
   margin: 0px;
+  padding: 0.5rem;
 }
 
 .playlist-tracks {
@@ -226,10 +798,34 @@ header {
   margin-top: auto;
   list-style: none;
   padding-left: 0;
-  padding: 0.5rem;
   display: grid;
   grid-gap: 0;
   grid-template-columns: repeat(1, auto);
+}
+
+.add-playlist-btn {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-playlist-title-container {
+  margin-top: auto;
+}
+
+.add-playlist-title {
+  margin: 0;
+  font-weight: 900;
+}
+
+.plus {
+  margin: 0;
+  font-weight: 600;
+  font-size: 50px;
 }
 
 .playlist-track {
@@ -348,7 +944,8 @@ footer {
   }
 
   .playlists-grid {
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    column-gap: 0;
+    row-gap: 2rem;
   }
 }
 
