@@ -82,7 +82,14 @@
             :key="track.id"
           >
             <div class="track-container">
-              <div class="music-icon"></div>
+              <div
+                class="music-icon"
+                @click="
+                  $store.commit('setMusic', {
+                    url: track.audio,
+                  })
+                "
+              ></div>
               <div class="track-info">
                 <p class="mini-text-track">{{ track.name }}</p>
                 <p class="mini-text-author">{{ track.artist_name }}</p>
@@ -182,9 +189,9 @@ export default {
     async truncate(str) {
       console.log(str)
       let length = str.length
-      let ending = "..."
+      let ending = '...'
       if (str.length > 18) {
-        console.log("hi")
+        console.log('hi')
         return str.substring(0, length - ending.length) + ending
       } else {
         return str
