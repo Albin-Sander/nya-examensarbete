@@ -143,7 +143,7 @@ export default {
                 .catch((error) => {
                   console.log(error)
                 })
-              return (window.location.href = '/signup')
+              return (window.location.href = '/login')
             })
             .catch((error) => {
               console.log(error)

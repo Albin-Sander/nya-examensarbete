@@ -1,11 +1,24 @@
 <template>
   <div class="library">
     <div class="desktop-container">
+      <createPlaylist
+        v-if="showNewPlaylistModal"
+        v-on:closeModal="toggleNewPlaylistModal()"
+      />
+      <addToPlaylist
+        v-if="showAddToPlaylist"
+        v-on:closeModal="toggleAddToPlaylistModal()"
+        :track="trackToAdd"
+        :playlists="userPlaylists"
+      />
       <header>
         <ul class="playlists-grid">
           <li class="playlist-item">
             <article class="playlist-preview card">
-              <button class="add-playlist-btn globalBtnActive">
+              <button
+                class="add-playlist-btn globalBtnActive"
+                @click="toggleNewPlaylistModal()"
+              >
                 <svg
                   width="24"
                   height="24"
@@ -32,41 +45,40 @@
           <li
             class="playlist-item"
             v-for="playlist in userPlaylists"
-            :key="playlist.name"
+            :key="playlist.playlist"
           >
             <article class="playlist-preview card">
               <ul class="playlist-tracks">
-                <li class="playlist-track">
-                  <div class="play"></div>
+                <li
+                  v-for="(track, index) in playlist.tracks.slice(0, 3)"
+                  :key="index"
+                  class="playlist-track"
+                >
+                  <div
+                    class="play"
+                    v-bind:style="{
+                      backgroundImage: 'url(' + track.album_image + ')',
+                    }"
+                  ></div>
                   <div class="track-info-container">
-                    <p class="track-preview-info">Levels</p>
-                    <p class="track-preview-info">Avicii</p>
+                    <p class="track-preview-info">{{ track.name }}</p>
+                    <p class="track-preview-info">{{ track.artist_name }}</p>
                   </div>
                 </li>
               </ul>
             </article>
             <footer class="playlist-info">
-              <p class="mini-text">{{ playlist.name }}</p>
+              <p class="mini-text">{{ playlist.playlist }}</p>
               <p class="mini-text">{{ playlist.author }}</p>
             </footer>
           </li>
-
-          <!-- v-for ends here -->
-
-          <!--<li class="playlist-item">
-          <article class="playlist-preview card"></article>
-          <footer class="playlist-info">
-            <p class="mini-text">Avicii 2018</p>
-            <p class="mini-text">David Andersen</p>
-          </footer>
-        </li>-->
         </ul>
       </header>
       <main>
         <ul class="track-list">
           <li
             class="track-list-item-container"
-            v-for="track in likedTracks"
+            v-for="(track, index) in likedTracks"
             :key="track.id"
           >
             <div class="track-container">
@@ -86,129 +98,13 @@
                 trackNoUnderMenu: activeUnderMenu !== track.id,
               }"
             >
-              <p class="mini-text-under-menu">Add to playlist</p>
+              <p
+                class="mini-text-under-menu"
+                @click="addTrackToPlaylist(index)"
+              >
+                Add to playlist
+              </p>
             </div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
-          </li>
-          <li class="track-list-item-container">
-            <div class="track-container">
-              <div class="music-icon"></div>
-              <div class="track-info">
-                <p class="mini-text-track"></p>
-                <p class="mini-text-author"></p>
-              </div>
-              <div class="track-under-menu-icon"></div>
-            </div>
-            <div></div>
           </li>
         </ul>
       </main>
@@ -218,14 +114,23 @@
 </template>
 
 <script>
+import CreatePlaylist from '../../components/CreatePlaylist'
+import AddToPlaylist from '../../components/AddToPlaylist'
 import { mapActions } from 'vuex'
 export default {
+  components: {
+    createPlaylist: CreatePlaylist,
+    addToPlaylist: AddToPlaylist,
+  },
   data: () => {
     return {
       user: {},
       likedTracks: [],
       userPlaylists: {},
       activeUnderMenu: '',
+      showNewPlaylistModal: false,
+      showAddToPlaylist: false,
+      trackToAdd: {},
     }
   },
   methods: {
@@ -253,23 +158,37 @@ export default {
     async getLibrary() {
       let data = this.$store.state.userLibrary
       this.likedTracks = data.likedTracks
-      this.likedPlaylists = data.likedPlaylists
+      this.userPlaylists = data.playlists
       console.log(data)
     },
-    async newPlaylist() {
-      let obj = {
-        email: this.user.email,
-        tracklist: [],
-        playlist: 'Newplaylist',
-      }
-      console.log(obj)
-      this.addNewPlaylist(obj)
+    async toggleNewPlaylistModal() {
+      return (this.showNewPlaylistModal = !this.showNewPlaylistModal)
+    },
+    toggleAddToPlaylistModal() {
+      return (this.showAddToPlaylist = !this.showAddToPlaylist)
     },
     toggleUnderMenu(param) {
       if (this.activeUnderMenu === param) {
         return (this.activeUnderMenu = '')
       }
       this.activeUnderMenu = param
+    },
+    async addTrackToPlaylist(param) {
+      let track = this.likedTracks[param]
+      this.trackToAdd = track
+      console.log(track)
+      return (this.showAddToPlaylist = !this.showAddToPlaylist)
+    },
+    async truncate(str) {
+      console.log(str)
+      let length = str.length
+      let ending = "..."
+      if (str.length > 18) {
+        console.log("hi")
+        return str.substring(0, length - ending.length) + ending
+      } else {
+        return str
+      }
     },
   },
 
@@ -502,7 +421,7 @@ main {
 }
 
 footer {
-  height: 10%;
+  height: 4rem;
   background-color: transparent;
   color: white;
 }
