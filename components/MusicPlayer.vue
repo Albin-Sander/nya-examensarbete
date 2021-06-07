@@ -1,19 +1,13 @@
 <template>
   <div class="media-controls">
-    <audio controls ref="player">
+    <audio controls autoplay ref="player">
       <source :src="$store.state.music" type="audio/ogg" />
       <source :src="$store.state.music" type="audio/mpeg" />
       Your browser does not support the audio element.
       <p>Hello</p>
     </audio>
-    <!-- <button
-      @click="
-        $store.commit(
-          'setMusic', {
-            'https://mp3l.jamendo.com/?trackid=1561379&format=mp31&from=iDywHKCe+xqfg1wwxV7eiA==|GmIQIvUjuucTL+rzbvj6XA=='
-          });">Click</button> -->
 
-    <button
+    <!-- <button
       @click="
         $store.commit('setMusic', {
           url: 'https://mp3l.jamendo.com/?trackid=1561379&format=mp31&from=iDywHKCe+xqfg1wwxV7eiA==|GmIQIvUjuucTL+rzbvj6XA==',
@@ -21,7 +15,7 @@
       "
     >
       Click
-    </button>
+    </button> -->
   </div>
 </template>
 
@@ -45,7 +39,13 @@ export default {
 audio {
   background-color: blue;
   border-radius: 2rem;
-  width: 50rem;
+  width: 25rem;
   margin-bottom: 5rem;
+}
+
+@media only screen and (min-width: 770px) {
+  audio {
+    width: 50rem;
+  }
 }
 </style>
