@@ -355,6 +355,11 @@ ul {
   margin-left: 17%;
       padding-right: 13%;
 }
+#app-instasearch{
+      margin-left: 60%;
+    /* margin-bottom: 16%; */
+    margin-top: -8%;
+}
 }
 
 @media (min-width:1075px){
