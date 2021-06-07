@@ -261,7 +261,7 @@ max-width: 70%;
   font-size: 25px;
   margin-left: 20px;
   color: white;
-  display: flex;
+  display: flex;  
   justify-content: center;
 }
 
@@ -282,6 +282,7 @@ max-width: 70%;
 #list-group {
   padding-right: 15%;
   max-width: 85%;
+  top: 0;
 }
 
 .list-animation-leave-active {
@@ -323,6 +324,15 @@ ul {
   }
   #list-group{
         max-width: 100%;
+            position: relative;
+    top: -2rem;
+  }
+  .author{
+    font-size: 18px;
+    text-align: center;
+    margin-left: 20px;
+    display: table-cell;
+    color: white;
   }
 
 }
