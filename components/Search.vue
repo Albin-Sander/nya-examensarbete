@@ -187,7 +187,18 @@ test (){
 .svg {
   width: 3rem;
 }
+button{
+  font-weight: 700;
+    background-color: #17A2B8;
+    color: white;
 
+}
+button:hover{
+  font-weight: 700;
+    background-color: #007bff;
+    color: white;
+
+}
 input:focus,
 select:focus,
 textarea:focus,
@@ -335,6 +346,29 @@ ul {
     color: white;
   }
 
+}
+@media  only screen and  (min-width:1281px){
+.input-container{
+  margin-left: 17%;
+}
+#list-group{
+  margin-left: 17%;
+      padding-right: 13%;
+}
+}
+
+@media (min-width:1075px){
+
+}
+
+@media (min-width:1025px){
+.input-container{
+  margin-left: 17%;
+}
+#list-group{
+  margin-left: 17%;
+      padding-right: 13%;
+}
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .input-container{
