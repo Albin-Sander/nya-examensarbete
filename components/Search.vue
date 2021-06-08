@@ -358,7 +358,7 @@ ul {
 #app-instasearch{
       margin-left: 60%;
     /* margin-bottom: 16%; */
-    margin-top: -8%;
+    margin-top: -6%;
 }
 }
 
