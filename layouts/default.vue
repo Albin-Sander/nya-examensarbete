@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <Nav />
 
     <Nuxt />
@@ -19,6 +19,10 @@ export default {
 </script>
 
 <style>
+.layout {
+  width: 100%
+}
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -54,8 +58,6 @@ input {
 
 body {
   background-color: #271642;
-  display: flex;
-  justify-content: center;
 }
 
 .globalBtnActive {
