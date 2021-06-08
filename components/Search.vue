@@ -33,7 +33,15 @@
 
           <img v-bind:src="result.image" />
           <span class="author">{{ result.album_name }}</span>
-          <button @click="play(result.audio)">&#9658; Play Sample</button>
+          <button
+            @click="
+              $store.commit('setMusic', {
+                url: result.audio,
+              })
+            "
+          >
+            &#9658; Play Sample
+          </button>
 
           <b-button @click="addTrack(result.id)"> add to library </b-button>
           <audio>
@@ -46,7 +54,7 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Popupmodal from './Popupmodal.vue'
 export default {
   components: { Popupmodal },
@@ -91,9 +99,9 @@ export default {
 
   methods: {
     ...mapActions({
-      saveTrack:'saveTrack'
+      saveTrack: 'saveTrack',
     }),
-    
+
     search: function () {
       let CLIENT_ID = process.env.clientId
       if (this.audio) {
@@ -139,36 +147,29 @@ export default {
       } */
       let vm = this
       await this.$fire.auth.onAuthStateChanged(async function (user) {
-
         if (user) {
-          console.log("hej")
-          for(var index in vm.results){
-            if(vm.results[index].id == trackId) {
+          console.log('hej')
+          for (var index in vm.results) {
+            if (vm.results[index].id == trackId) {
               const email = user.email
               const track = vm.results[index]
-              vm.saveTrack({email, track})
-            //   console.log(track)
-            // }
-            // var obj =  vm.results[track].album_name
-            // console.log(obj)
+              vm.saveTrack({ email, track })
+              //   console.log(track)
+              // }
+              // var obj =  vm.results[track].album_name
+              // console.log(obj)
+            }
+            //vm.checkFunction(user.email)
           }
-          //vm.checkFunction(user.email)
-         
-        }
-        }else {
+        } else {
           console.log('you need to be logged in')
           return (window.location.href = '/login')
         }
-
-
       })
-      
-      
     },
-test (){
-        this.$store.dispatch('checkUserExists')
-
-},
+    test() {
+      this.$store.dispatch('checkUserExists')
+    },
     displayComponent() {
       this.isActive = false
     },
