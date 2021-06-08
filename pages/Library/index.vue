@@ -42,7 +42,7 @@
               <p class="mini-text">Author</p>
             </footer>
           </li>
-          
+
           <li
             class="playlist-item"
             v-for="playlist in userPlaylists"
@@ -56,14 +56,18 @@
                   class="playlist-track"
                 >
                   <div
-                    class="play"
+                    class="play card"
                     v-bind:style="{
                       backgroundImage: 'url(' + track.album_image + ')',
                     }"
                   ></div>
                   <div class="track-info-container">
-                    <p class="track-preview-info">{{ track.name | trackPreviewTruncate()}}</p>
-                    <p class="track-preview-info">{{ track.artist_name | trackPreviewTruncate() }}</p>
+                    <p class="track-preview-info">
+                      {{ track.name | trackPreviewTruncate() }}
+                    </p>
+                    <p class="track-preview-info">
+                      {{ track.artist_name | trackPreviewTruncate() }}
+                    </p>
                   </div>
                 </li>
               </ul>
@@ -76,7 +80,8 @@
         </ul>
       </header>
       <main>
-        <ul class="track-list">
+        <h1 v-if="likedTracks.length == 0">You have no liked tracks</h1>
+        <ul v-else class="track-list">
           <li
             class="track-list-item-container"
             v-for="(track, index) in likedTracks"
@@ -92,7 +97,9 @@
                 "
               ></div>
               <div class="track-info">
-                <p class="mini-text-track">{{ track.name | trackTruncate() }}</p>
+                <p class="mini-text-track">
+                  {{ track.name | trackTruncate() }}
+                </p>
                 <p class="mini-text-author">{{ track.artist_name }}</p>
               </div>
               <div
@@ -114,10 +121,10 @@
               </p>
             </div>
           </li>
-        </ul>
+        </ul> 
       </main>
-      <footer class="mobile-footer"></footer>
     </div>
+    <footer class="mobile-footer"><p>Powered by Jamendo</p></footer>
   </div>
 </template>
 
@@ -142,10 +149,10 @@ export default {
     }
   },
   filters: {
-    trackPreviewTruncate: function(str) {
+    trackPreviewTruncate: function (str) {
       let length = str.length
       let ending = '...'
-     
+
       if (length > 13) {
         console.log(str)
         let newStr = str.slice(0, 13)
@@ -155,10 +162,10 @@ export default {
         return str
       }
     },
-    trackTruncate: function(str) {
+    trackTruncate: function (str) {
       let length = str.length
       let ending = '...'
-     
+
       if (length > 30) {
         console.log(str)
         let newStr = str.slice(0, 30)
@@ -167,7 +174,7 @@ export default {
       } else {
         return str
       }
-    }
+    },
   },
   methods: {
     ...mapActions({
@@ -215,22 +222,9 @@ export default {
       console.log(track)
       return (this.showAddToPlaylist = !this.showAddToPlaylist)
     },
-    async truncate(str) {
-      console.log(str)
-      let length = str.length
-      let ending = '...'
-      if (str.length > 18) {
-        console.log('hi')
-        return str.substring(0, length - ending.length) + ending
-      } else {
-        return str
-      }
-    },
   },
 
-  computed: {
-    
-  },
+  computed: {},
   mounted() {
     this.checkUser()
   },
@@ -335,7 +329,7 @@ header {
 
 .play {
   height: 100%;
-  width: 2.5rem;
+  width: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -346,7 +340,7 @@ header {
 
 .track-info-container {
   display: flex;
-  padding-left: 0.2rem;
+  padding-left: 0.4rem;
   flex-direction: column;
 }
 
@@ -456,26 +450,23 @@ main {
 }
 
 footer {
-  height: 4rem;
+  height: 6rem;
   background-color: transparent;
-  color: white;
+  color: #00ddff;
+}
+
+.mobile-footer {
+  background-color: transparent;
+  color: #00ddff;
+  padding-left: 1.5rem;
+  position: fixed;
+  margin-top: auto;
+  bottom: 3rem;
 }
 
 @media only screen and (min-width: 500px) {
   .playlists-container {
     grid-template-columns: repeat(3, auto);
-  }
-}
-
-@media only screen and (max-width: 350px) {
-  .playlist-item {
-    width: 8rem;
-    height: 10rem;
-  }
-
-  .playlists-grid {
-    column-gap: 0;
-    row-gap: 2rem;
   }
 }
 
