@@ -42,6 +42,7 @@
               <p class="mini-text">Author</p>
             </footer>
           </li>
+          
           <li
             class="playlist-item"
             v-for="playlist in userPlaylists"
@@ -61,8 +62,8 @@
                     }"
                   ></div>
                   <div class="track-info-container">
-                    <p class="track-preview-info">{{ track.name }}</p>
-                    <p class="track-preview-info">{{ track.artist_name }}</p>
+                    <p class="track-preview-info">{{ track.name | trackPreviewTruncate()}}</p>
+                    <p class="track-preview-info">{{ track.artist_name | trackPreviewTruncate() }}</p>
                   </div>
                 </li>
               </ul>
@@ -91,7 +92,7 @@
                 "
               ></div>
               <div class="track-info">
-                <p class="mini-text-track">{{ track.name }}</p>
+                <p class="mini-text-track">{{ track.name | trackTruncate() }}</p>
                 <p class="mini-text-author">{{ track.artist_name }}</p>
               </div>
               <div
@@ -138,6 +139,34 @@ export default {
       showNewPlaylistModal: false,
       showAddToPlaylist: false,
       trackToAdd: {},
+    }
+  },
+  filters: {
+    trackPreviewTruncate: function(str) {
+      let length = str.length
+      let ending = '...'
+     
+      if (length > 13) {
+        console.log(str)
+        let newStr = str.slice(0, 13)
+        console.log('hi')
+        return newStr.concat(ending)
+      } else {
+        return str
+      }
+    },
+    trackTruncate: function(str) {
+      let length = str.length
+      let ending = '...'
+     
+      if (length > 30) {
+        console.log(str)
+        let newStr = str.slice(0, 30)
+        console.log('hi')
+        return newStr.concat(ending)
+      } else {
+        return str
+      }
     }
   },
   methods: {
@@ -200,10 +229,7 @@ export default {
   },
 
   computed: {
-    //   async library() {
-    //       console.log("Library updated")
-    //       return this.library = this.$store.state.userLibrary
-    //   }
+    
   },
   mounted() {
     this.checkUser()
@@ -225,6 +251,8 @@ header {
   background-color: transparent;
   padding: 1rem;
   min-height: 14rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .playlist-item {
@@ -454,19 +482,33 @@ footer {
 @media only screen and (min-width: 768px) {
   header {
     display: flex;
+    justify-content: flex-start;
+    width: 95%;
+  }
+
+  .library {
+    display: flex;
     justify-content: center;
+    min-height: 55rem;
+  }
+
+  .desktop-container {
+    width: 90vw;
+    background-color: transparent;
+    height: max-content;
   }
 
   .playlists-grid {
-    width: 90%;
+    width: max-content;
   }
 
   .track-list {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(2, 1fr);
-    padding-right: 2rem;
-    padding-left: 2rem;
+    padding-right: 0rem;
+    padding-left: 0rem;
+    width: 100%;
   }
 
   .trackNoUnderMenu {
@@ -477,15 +519,9 @@ footer {
     align-items: flex-end;
     justify-content: flex-start;
   }
-}
 
-@media only screen and (min-width: 900px) {
-  .playlists-grid {
-    width: 70%;
-  }
-
-  .track-list {
-    width: 75%;
+  .track-under-menu-icon {
+    display: none;
   }
 }
 
@@ -503,12 +539,10 @@ footer {
   .desktop-container {
     width: 65vw;
     background-color: transparent;
-
     height: max-content;
   }
 
   .playlists-grid {
-    width: 95%;
     grid-template-rows: repeat(3, auto);
   }
 
@@ -519,7 +553,7 @@ footer {
   }
 }
 
-@media only screen and (min-width: 1300px) {
+@media only screen and (min-width: 1500px) {
   .track-list {
     grid-template-columns: repeat(3, 1fr);
   }
