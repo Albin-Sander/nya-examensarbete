@@ -269,11 +269,10 @@ max-width: 70%;
 }
 
 .author {
-  font-size: 25px;
-  margin-left: 20px;
+  font-size: 18px;
+  margin-left: 2px;
   color: white;
   display: flex;  
-  justify-content: center;
 }
 
 .title {
@@ -300,7 +299,7 @@ max-width: 70%;
   position: absolute;
 }
 img {
-  max-width: 20rem;
+max-width: 5rem;
 }
 ul {
   background: #3b2460;
@@ -341,7 +340,7 @@ ul {
   .author{
     font-size: 18px;
     text-align: center;
-    margin-left: 20px;
+    margin-left: 2px;
     display: table-cell;
     color: white;
   }
@@ -350,10 +349,12 @@ ul {
 @media  only screen and  (min-width:1281px){
 .input-container{
   margin-left: 17%;
+  padding: 0;
 }
 #list-group{
   margin-left: 17%;
       padding-right: 13%;
+      
 }
 #app-instasearch{
       margin-left: 60%;
