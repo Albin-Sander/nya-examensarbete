@@ -292,7 +292,7 @@ max-width: 70%;
 #list-group {
   padding-right: 15%;
   max-width: 85%;
-  top: 0;
+  height: 0;
 }
 
 .list-animation-leave-active {
