@@ -132,6 +132,7 @@
 import CreatePlaylist from '../../components/CreatePlaylist'
 import AddToPlaylist from '../../components/AddToPlaylist'
 import { mapActions } from 'vuex'
+
 export default {
   components: {
     createPlaylist: CreatePlaylist,
