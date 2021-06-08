@@ -187,7 +187,18 @@ test (){
 .svg {
   width: 3rem;
 }
+button{
+  font-weight: 700;
+    background-color: #17A2B8;
+    color: white;
 
+}
+button:hover{
+  font-weight: 700;
+    background-color: #007bff;
+    color: white;
+
+}
 input:focus,
 select:focus,
 textarea:focus,
@@ -225,8 +236,7 @@ header h1 {
 }
 
 .input-container {
-  margin-right: 15%;
-
+max-width: 70%;
   border-radius: 5px;
   background: #1e1133;
   padding: 10px;
@@ -262,7 +272,7 @@ header h1 {
   font-size: 25px;
   margin-left: 20px;
   color: white;
-  display: flex;
+  display: flex;  
   justify-content: center;
 }
 
@@ -282,6 +292,8 @@ header h1 {
 }
 #list-group {
   padding-right: 15%;
+  max-width: 85%;
+  top: 0;
 }
 
 .list-animation-leave-active {
@@ -303,5 +315,75 @@ ul {
 }
 .active {
   display: none;
+}
+
+@media only screen and (max-width: 770px) {
+  #app-instasearch{
+    margin-left: 0;
+        width: 100%;
+  }
+  .input-container{
+    margin-right: 0;
+    padding: 0;
+        position: relative;
+    top: -2rem;
+        max-width: 100%;
+            width: 100vw;
+  }
+  img{
+    max-width: 5rem;
+  }
+  #list-group{
+        max-width: 100%;
+            position: relative;
+    top: -2rem;
+  }
+  .author{
+    font-size: 18px;
+    text-align: center;
+    margin-left: 20px;
+    display: table-cell;
+    color: white;
+  }
+
+}
+@media  only screen and  (min-width:1281px){
+.input-container{
+  margin-left: 17%;
+}
+#list-group{
+  margin-left: 17%;
+      padding-right: 13%;
+}
+#app-instasearch{
+      margin-left: 60%;
+    /* margin-bottom: 16%; */
+    margin-top: -6%;
+}
+}
+
+@media (min-width:1075px){
+
+}
+
+@media (min-width:1025px){
+.input-container{
+  margin-left: 17%;
+}
+#list-group{
+  margin-left: 17%;
+      padding-right: 13%;
+}
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .input-container{
+        margin-right: 0;
+    padding: 0;
+    max-width: 50%;
+    width: 100vw;
+  }
+  #list-group{
+    max-width: 65%;
+  }
 }
 </style>

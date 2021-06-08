@@ -22,6 +22,8 @@
         >
       </li> -->
     </ul>
+              <Search />
+
   </div>
 </template>
 
