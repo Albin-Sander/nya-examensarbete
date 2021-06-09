@@ -18,6 +18,7 @@ export const mutations = {
   },
 
   setUserLibrary(state, payload) {
+    console.log("hi")
     state.userLibrary = payload.library
     console.log(payload.library)
   },
@@ -68,7 +69,7 @@ export const actions = {
         const data = {
           email: params.email,
           displayName: params.userName,
-          library: { likedTracks: [], likedPlaylists: {}, playlists: {} },
+          library: { likedTracks: [], likedPlaylists: {}, playlists: [] },
         }
         await ref.add(data)
       } else {
@@ -102,9 +103,34 @@ export const actions = {
         let playLists = data.library.playlists
         console.log(playLists)
         let playlistName = param.playlist
-        console.log(playlistName, param.tracklist)
-        playLists[playlistName] = param.tracklist
+        let playlistObj = {
+          playlist: playlistName,
+          author: data.displayName,
+          tracks: param.tracklist,
+        }
+        console.log(playlistObj)
+        playLists.push(playlistObj)
         console.log(await playLists)
+        await ref.doc(doc.id).update({
+          'library.playlists': playLists,
+        })
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  async addTrackToPlaylist(context, payload) {
+    console.log("hi")
+    try {
+      const ref = this.$fire.firestore.collection('users')
+      const snapshot = await ref.where('email', '==', payload.email).get()
+      await snapshot.forEach(async (doc) => {
+        let data = doc.data()
+        let playLists = data.library.playlists
+        let index = payload.position
+        console.log(payload.position)
+        playLists[index].tracks.push(payload.track)
         await ref.doc(doc.id).update({
           'library.playlists': playLists,
         })

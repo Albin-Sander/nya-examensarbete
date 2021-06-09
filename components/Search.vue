@@ -33,7 +33,15 @@
 
           <img v-bind:src="result.image" />
           <span class="author">{{ result.album_name }}</span>
-          <button @click="play(result.audio)">&#9658; Play Sample</button>
+          <button
+            @click="
+              $store.commit('setMusic', {
+                url: result.audio,
+              })
+            "
+          >
+            &#9658; Play Sample
+          </button>
 
           <b-button @click="addTrack(result.id)"> add to library </b-button>
           <audio>
@@ -130,7 +138,7 @@ export default {
               const email = user.email
               const track = vm.results[index]
               vm.saveTrack({ email, track })
-            }
+
           }
         } else {
           console.log('you need to be logged in')
