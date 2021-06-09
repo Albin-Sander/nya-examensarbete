@@ -129,22 +129,6 @@ export default {
       this.audio.play()
     },
     addTrack: async function (trackId) {
-      /* try {
-        let ref = this.results
-
-        for (var key in ref) {
-          var obj = ref[key].album_name
-          this.$fire.firestore
-            .collection('test')
-            .doc('GJhjnGSWINKcHjMsnUrj')
-            .set({
-              track: obj,
-            })
-          console.log('added:', obj)
-        }
-      } catch (e) {
-        console.log(e)
-      } */
       let vm = this
       await this.$fire.auth.onAuthStateChanged(async function (user) {
         if (user) {
@@ -154,12 +138,7 @@ export default {
               const email = user.email
               const track = vm.results[index]
               vm.saveTrack({ email, track })
-              //   console.log(track)
-              // }
-              // var obj =  vm.results[track].album_name
-              // console.log(obj)
             }
-            //vm.checkFunction(user.email)
           }
         } else {
           console.log('you need to be logged in')
@@ -188,17 +167,15 @@ export default {
 .svg {
   width: 3rem;
 }
-button{
+button {
   font-weight: 700;
-    background-color: #17A2B8;
-    color: white;
-
+  background-color: #17a2b8;
+  color: white;
 }
-button:hover{
+button:hover {
   font-weight: 700;
-    background-color: #007bff;
-    color: white;
-
+  background-color: #007bff;
+  color: white;
 }
 input:focus,
 select:focus,
@@ -213,10 +190,10 @@ html {
 
 body {
   display: grid;
-  grid-template-rows: 150px 1fr;
+  grid-template-rows: 9.375rem 1fr;
   background-color: #f5f5f5;
   font-family: 'Roboto Slab', serif;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 header {
@@ -227,28 +204,28 @@ header {
 
 header h1 {
   place-self: center;
-  font-size: 42px;
+  font-size: 2.625rem;
 }
 
 #app-instasearch {
   place-self: center;
-  margin-top: 30px;
-  width: 600px;
+  margin-top: 1.875rem;
+  width: 37.5rem;
 }
 
 .input-container {
-max-width: 70%;
-  border-radius: 5px;
+  max-width: 70%;
+  border-radius: 0.3125rem;
   background: #1e1133;
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 .input-container input {
   border: none;
   background: transparent;
   color: white;
-  padding: 6px 15px;
-  font-size: 18px;
+  padding: 0.375rem 0.9375rem;
+  font-size: 1.125rem;
 }
 
 ::placeholder {
@@ -260,26 +237,25 @@ max-width: 70%;
 .photo {
   list-style: none;
   display: grid;
-  grid-template-columns: 200px auto;
-  margin-top: 20px;
+  grid-template-columns: 12.5rem auto;
+  margin-top: 1.25rem;
   align-items: center;
   background-color: #e9edf0;
-  padding: 30px 50px;
-  border-radius: 5px;
-  border: 1px solid #e3e3e3;
+  padding: 1.875rem 3.125rem;
+  border-radius: 0.3125rem;
+  border: 0.0625rem solid #e3e3e3;
 }
 
 .author {
-  font-size: 25px;
-  margin-left: 20px;
+  font-size: 1.125rem;
+  margin-left: 0.125rem;
   color: white;
-  display: flex;  
-  justify-content: center;
+  display: flex;
 }
 
 .title {
-  border-radius: 5px;
-  width: 200px;
+  border-radius: 0.3125rem;
+  width: 12.5rem;
 }
 
 .photo-animated {
@@ -289,25 +265,25 @@ max-width: 70%;
 .list-animation-enter,
 .list-animation-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(1.875rem);
 }
 #list-group {
   padding-right: 15%;
   max-width: 85%;
-  top: 0;
+  height: 0;
 }
 
 .list-animation-leave-active {
   position: absolute;
 }
 img {
-  max-width: 20rem;
+  max-width: 5rem;
 }
 ul {
   background: #3b2460;
   padding: 5%;
   overflow-y: scroll;
-  height: 800px;
+  height: 50rem;
 }
 
 .mb-2 {
@@ -318,73 +294,73 @@ ul {
   display: none;
 }
 
-@media only screen and (max-width: 770px) {
-  #app-instasearch{
+@media only screen and (max-width: 48.125rem) {
+  #app-instasearch {
     margin-left: 0;
-        width: 100%;
+    width: 100%;
   }
-  .input-container{
+  .input-container {
     margin-right: 0;
     padding: 0;
-        position: relative;
+    position: relative;
     top: -2rem;
-        max-width: 100%;
-            width: 100vw;
+    max-width: 100%;
+    width: 100vw;
   }
-  img{
+  img {
     max-width: 5rem;
   }
-  #list-group{
-        max-width: 100%;
-            position: relative;
+  #list-group {
+    max-width: 100%;
+    position: relative;
     top: -2rem;
   }
-  .author{
-    font-size: 18px;
+  .author {
+    font-size: 1.125rem;
     text-align: center;
-    margin-left: 20px;
+    margin-left: 0.125rem;
     display: table-cell;
     color: white;
   }
-
 }
-@media  only screen and  (min-width:1281px){
-.input-container{
-  margin-left: 17%;
-}
-#list-group{
-  margin-left: 17%;
-      padding-right: 13%;
-}
-#app-instasearch{
-      margin-left: 60%;
+@media only screen and (min-width: 80.0625rem) {
+  .input-container {
+    margin-left: 17%;
+    padding: 0;
+  }
+  #list-group {
+    margin-left: 17%;
+    padding-right: 13%;
+  }
+  #app-instasearch {
+    margin-left: 60%;
     /* margin-bottom: 16%; */
-    margin-top: -6%;
-}
-}
-
-@media (min-width:1075px){
-
+    margin-top: -2.5rem;
+  }
 }
 
-@media (min-width:1025px){
-.input-container{
-  margin-left: 17%;
+@media (min-width: 67.1875rem) {
 }
-#list-group{
-  margin-left: 17%;
-      padding-right: 13%;
+
+@media (min-width: 64.0625rem) {
+  .input-container {
+    margin-left: 17%;
+  }
+  #list-group {
+    margin-left: 17%;
+    padding-right: 13%;
+  }
 }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  .input-container{
-        margin-right: 0;
+@media only screen and (min-device-width: 48rem) and (max-device-width: 64rem) {
+  .input-container {
+    margin-right: 0;
     padding: 0;
     max-width: 50%;
     width: 100vw;
   }
-  #list-group{
+  #list-group {
     max-width: 65%;
+    z-index: 50;
   }
 }
 </style>

@@ -16,19 +16,25 @@
           <NuxtLink to="/login">Log in</NuxtLink>
         </a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-          >Disabled</a
-        >
-      </li> -->
+      <li>
+        <b-button @click="showSearch">Search</b-button>
+      </li>
     </ul>
-              <Search />
-
+    <Search v-if="showInput" />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    showInput: Boolean,
+  },
+  methods: {
+    showSearch() {
+      this.$emit('showsearch')
+    },
+  },
+}
 </script>
 
 <style scoped>
