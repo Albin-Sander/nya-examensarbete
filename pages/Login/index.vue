@@ -1,14 +1,7 @@
 <template>
   <!-- This page should be reachable if user user exists -->
-  <div v-if="user" class="login-container">
-    <LazyLoginForm v-if="user.user == false"/>
-    <div v-else class="example">  
-      <h2> Logged in as {{user.email}} </h2>
-      <button @click="signOut()"> sign out </button>
-    </div>
-  </div>
-  <div v-else class="login-container">
-    <h2>Loading...</h2>
+  <div class="login-container">
+    <LazyLoginForm/>
   </div>
 </template>
 

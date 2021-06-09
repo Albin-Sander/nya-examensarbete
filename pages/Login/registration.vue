@@ -1,10 +1,7 @@
 <template>
   <!-- This page should be reachable if user user exists -->
   <div class="registraion-container">
-    <LazyRegisterForm v-if="user.user == false"/>
-    <div v-else> 
-      <h2> Loading... </h2>
-    </div>
+    <LazyRegisterForm/>
   </div>
 </template>
 
@@ -17,9 +14,6 @@ export default {
       user: "",
       registration: false
     }
-  },
-  props: {
-
   },
   methods: {
     async createUser() {
@@ -54,39 +48,6 @@ export default {
     async switchForm() {
       this.registration = !this.registration
     },
-    //FireStore
-
-    //Get data from db test an document test
-    async getData() {
-      // const db = this.$fire.firestore
-      //   .collection('test')
-      //   .doc('GJhjnGSWINKcHjMsnUrj')
-      // try {
-      //   const doc = await db.get()
-      //   console.log(doc.data())
-      // } catch (e) {
-      //   console.error(e)
-      // }
-    },
-
-    // Add Document
-    async addUser() {
-      // THS IS JUST A EXAMPLE. DO NOT ADD A USER THIS WAY
-      // const db = this.$fire.firestore.collection('users')
-      // const x = await db.get()
-      // console.log('Inside addUser')
-      // this.getAllData()
-      // await db.doc('UUID').set({
-      //   username: 'Markus',
-      // })
-    },
-
-    // Get data from db test
-    async getAllData() {
-      // const snapshot = await this.$fire.firestore.collection('users').get()
-      // const readable = snapshot.docs.map((doc) => doc.data())
-      // console.log(readable)
-    },
     async checkUser() {
       let vm = this;
       let result = await this.$fire.auth.onAuthStateChanged(async function(user) {
@@ -94,7 +55,7 @@ export default {
         if (user) {
           console.log(user.email)
           obj = {user: true, email: await user.email}
-          return //(window.location.href = '/')
+          return //vm.signOut()
         } else {
           console.log("no user")
           obj = {user: false, email: ""}
@@ -125,6 +86,9 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  color: white;
+}
 
 .registraion-container {
   display: flex;

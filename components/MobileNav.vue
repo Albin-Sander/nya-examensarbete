@@ -4,9 +4,9 @@
       <li class="navbar-mobile-list-item" v-on:click="changePage('home')">
         <NuxtLink to="/">
           <svg
-            width="24"
+            width="25"
             height="24"
-            viewBox="0 0 15 15"
+            viewBox="0 0 15 14"
             xmlns="http://www.w3.org/2000/svg"
             v-bind:class="{
               activePage: page == 'home',
@@ -15,8 +15,11 @@
           >
             <path
               d="M13.8719 6.57772L7.43594 0.146472C7.3896 0.10004 7.33455 0.0632039 7.27396 0.0380704C7.21337 0.012937 7.14841 0 7.08281 0C7.01721 0 6.95226 0.012937 6.89166 0.0380704C6.83107 0.0632039 6.77603 0.10004 6.72969 0.146472L0.29375 6.57772C0.10625 6.76522 0 7.01991 0 7.28553C0 7.8371 0.448437 8.28553 1 8.28553H1.67813V12.8746C1.67813 13.1512 1.90156 13.3746 2.17813 13.3746H6.08281V9.8746H7.83281V13.3746H11.9875C12.2641 13.3746 12.4875 13.1512 12.4875 12.8746V8.28553H13.1656C13.4312 8.28553 13.6859 8.18085 13.8734 7.99178C14.2625 7.60116 14.2625 6.96835 13.8719 6.57772V6.57772Z"
+
+
               fill="white"
             />
+
             />
           </svg>
         </NuxtLink>
@@ -26,7 +29,7 @@
           <svg
             width="24"
             height="24"
-            viewBox="0 0 14 14"
+            viewBox="0 0 15 14"
             xmlns="http://www.w3.org/2000/svg"
             v-bind:class="{
               activePageSearch: page == 'search',
@@ -44,7 +47,7 @@
           <svg
             width="24"
             height="24"
-            viewBox="0 0 15 15"
+            viewBox="0 0 15 14"
             xmlns="http://www.w3.org/2000/svg"
             v-bind:class="{
               activePage: page == 'library',
@@ -57,12 +60,19 @@
           </svg>
         </NuxtLink>
       </li>
+      <li class="navbar-mobile-list-item">
+        <logout />
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
+import Logout from '../components/Logout'
 export default {
+  components: {
+    logout: Logout,
+  },
   data: () => {
     return {
       page: '',

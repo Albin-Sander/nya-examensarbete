@@ -1,5 +1,5 @@
 <template>
-  <div class="library">
+  <div v-if="user.user === true" class="library">
     <div class="desktop-container">
       <createPlaylist
         v-if="showNewPlaylistModal"
@@ -123,8 +123,8 @@
           </li>
         </ul> 
       </main>
+      <footer class="mobile-footer"><p>Powered by Jamendo</p></footer>
     </div>
-    <footer class="mobile-footer"><p>Powered by Jamendo</p></footer>
   </div>
 </template>
 
@@ -132,6 +132,7 @@
 import CreatePlaylist from '../../components/CreatePlaylist'
 import AddToPlaylist from '../../components/AddToPlaylist'
 import { mapActions } from 'vuex'
+
 export default {
   components: {
     createPlaylist: CreatePlaylist,
@@ -282,6 +283,10 @@ header {
   list-style: none;
   margin: 0px;
   padding: 0.5rem;
+}
+
+h1 {
+  color: white;
 }
 
 .playlist-tracks {
@@ -459,9 +464,7 @@ footer {
   background-color: transparent;
   color: #00ddff;
   padding-left: 1.5rem;
-  position: fixed;
-  margin-top: auto;
-  bottom: 3rem;
+  margin-bottom: auto;
 }
 
 @media only screen and (min-width: 500px) {
