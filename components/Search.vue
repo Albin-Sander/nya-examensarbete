@@ -358,9 +358,18 @@ ul {
     max-width: 50%;
     width: 100vw;
   }
-  #list-group {
+  #list-group[data-v-7a642ec3] {
     max-width: 65%;
     z-index: 50;
   }
+}
+@media only screen and (max-width: 48.125rem){
+#list-group[data-v-7a642ec3] {
+    max-width: 100%;
+    position: relative;
+    top: -2rem;
+        z-index: 50;
+
+}
 }
 </style>
