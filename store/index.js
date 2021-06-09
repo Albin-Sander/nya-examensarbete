@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export const state = () => ({
   credentialsExist: false,
   userLibrary: {},
+  playlistToShow: '',
   music: '',
 })
 
@@ -26,6 +27,17 @@ export const mutations = {
   setMusic(state, { url }) {
     state.music = url
   },
+
+  setPlaylist(state, payload) {
+    let obj = {
+      playlist: payload.playlist,
+      author: payload.author,
+      tracks: payload.tracks
+    }
+    console.log(obj)
+    state.playlistToShow = obj
+    console.log(state.playlistToShow)
+  }
 }
 
 export const actions = {

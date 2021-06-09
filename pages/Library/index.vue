@@ -45,8 +45,9 @@
 
           <li
             class="playlist-item"
-            v-for="playlist in userPlaylists"
+            v-for="(playlist, index) in userPlaylists"
             :key="playlist.playlist"
+            @click="showPlaylist(index)"
           >
             <article class="playlist-preview card">
               <ul class="playlist-tracks">
@@ -132,6 +133,7 @@
 import CreatePlaylist from '../../components/CreatePlaylist'
 import AddToPlaylist from '../../components/AddToPlaylist'
 import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -142,7 +144,7 @@ export default {
     return {
       user: {},
       likedTracks: [],
-      userPlaylists: {},
+      userPlaylists: [],
       activeUnderMenu: '',
       showNewPlaylistModal: false,
       showAddToPlaylist: false,
@@ -182,6 +184,9 @@ export default {
       getUserLibrary: 'getUserLibrary',
       addNewPlaylist: 'addNewPlaylist',
     }),
+    ...mapMutations({
+      setPlaylist: "setPlaylist"
+    }),
     async checkUser() {
       let vm = this
       await this.$fire.auth.onAuthStateChanged(async function (user) {
@@ -203,7 +208,6 @@ export default {
       let data = this.$store.state.userLibrary
       this.likedTracks = data.likedTracks
       this.userPlaylists = data.playlists
-      console.log(data)
     },
     async toggleNewPlaylistModal() {
       return (this.showNewPlaylistModal = !this.showNewPlaylistModal)
@@ -220,9 +224,12 @@ export default {
     async addTrackToPlaylist(param) {
       let track = this.likedTracks[param]
       this.trackToAdd = track
-      console.log(track)
       return (this.showAddToPlaylist = !this.showAddToPlaylist)
     },
+    showPlaylist(param) {
+      this.setPlaylist(this.userPlaylists[param])
+      return (window.location.href = '/library/playlist')
+    }
   },
 
   computed: {},
@@ -258,6 +265,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .playlists-grid {
