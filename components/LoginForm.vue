@@ -77,6 +77,7 @@ export default {
           .then((userCredential) => {
             let user = userCredential.user
             console.log(user.email)
+            return (window.location.href = '/')
           })
           .catch((error) => {
             if (error.code == 'auth/wrong-password') {

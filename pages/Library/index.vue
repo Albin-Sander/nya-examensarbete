@@ -1,5 +1,5 @@
 <template>
-  <div class="library">
+  <div v-if="user.user === true" class="library">
     <div class="desktop-container">
       <createPlaylist
         v-if="showNewPlaylistModal"
