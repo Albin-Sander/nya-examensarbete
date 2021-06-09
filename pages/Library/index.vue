@@ -396,6 +396,7 @@ h1 {
   background-image: url('~@/assets/library/vinyl-icon.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  cursor: pointer;
 }
 
 .track-info {
@@ -420,6 +421,7 @@ h1 {
   background-image: url('~@/assets/library/menu-dots.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  cursor: pointer;
 }
 
 .trackUnderMenu {
