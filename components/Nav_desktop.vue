@@ -22,13 +22,17 @@
         >
       </li> -->
     </ul>
-              <Search />
+              <Search v-if="showInput"/>
 
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    showInput: Boolean
+  }
+}
 </script>
 
 <style scoped>

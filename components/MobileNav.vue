@@ -21,7 +21,7 @@
           </svg>
         </NuxtLink>
       </li>
-      <li class="navbar-mobile-list-item" v-on:click="changePage('search')">
+      <li class="navbar-mobile-list-item" v-on:click="showSearch()">
         <NuxtLink to="/">
           <svg
             width="24"
@@ -66,6 +66,7 @@ export default {
   data: () => {
     return {
       page: '',
+      
     }
   },
   methods: {
@@ -73,6 +74,9 @@ export default {
       console.log(page)
       return (this.page = page)
     },
+    showSearch() {
+      this.$emit('showsearch');
+    }
   },
 }
 </script>

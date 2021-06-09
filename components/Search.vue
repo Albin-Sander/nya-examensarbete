@@ -129,22 +129,6 @@ export default {
       this.audio.play()
     },
     addTrack: async function (trackId) {
-      /* try {
-        let ref = this.results
-
-        for (var key in ref) {
-          var obj = ref[key].album_name
-          this.$fire.firestore
-            .collection('test')
-            .doc('GJhjnGSWINKcHjMsnUrj')
-            .set({
-              track: obj,
-            })
-          console.log('added:', obj)
-        }
-      } catch (e) {
-        console.log(e)
-      } */
       let vm = this
       await this.$fire.auth.onAuthStateChanged(async function (user) {
         if (user) {
@@ -154,12 +138,7 @@ export default {
               const email = user.email
               const track = vm.results[index]
               vm.saveTrack({ email, track })
-              //   console.log(track)
-              // }
-              // var obj =  vm.results[track].album_name
-              // console.log(obj)
-            }
-            //vm.checkFunction(user.email)
+
           }
         } else {
           console.log('you need to be logged in')
@@ -188,17 +167,15 @@ export default {
 .svg {
   width: 3rem;
 }
-button{
+button {
   font-weight: 700;
-    background-color: #17A2B8;
-    color: white;
-
+  background-color: #17a2b8;
+  color: white;
 }
-button:hover{
+button:hover {
   font-weight: 700;
-    background-color: #007bff;
-    color: white;
-
+  background-color: #007bff;
+  color: white;
 }
 input:focus,
 select:focus,
@@ -237,7 +214,7 @@ header h1 {
 }
 
 .input-container {
-max-width: 70%;
+  max-width: 70%;
   border-radius: 5px;
   background: #1e1133;
   padding: 10px;
@@ -270,11 +247,10 @@ max-width: 70%;
 }
 
 .author {
-  font-size: 25px;
-  margin-left: 20px;
+  font-size: 18px;
+  margin-left: 2px;
   color: white;
-  display: flex;  
-  justify-content: center;
+  display: flex;
 }
 
 .title {
@@ -294,14 +270,14 @@ max-width: 70%;
 #list-group {
   padding-right: 15%;
   max-width: 85%;
-  top: 0;
+  height: 0;
 }
 
 .list-animation-leave-active {
   position: absolute;
 }
 img {
-  max-width: 20rem;
+  max-width: 5rem;
 }
 ul {
   background: #3b2460;
@@ -319,72 +295,72 @@ ul {
 }
 
 @media only screen and (max-width: 770px) {
-  #app-instasearch{
+  #app-instasearch {
     margin-left: 0;
-        width: 100%;
+    width: 100%;
   }
-  .input-container{
+  .input-container {
     margin-right: 0;
     padding: 0;
-        position: relative;
+    position: relative;
     top: -2rem;
-        max-width: 100%;
-            width: 100vw;
+    max-width: 100%;
+    width: 100vw;
   }
-  img{
+  img {
     max-width: 5rem;
   }
-  #list-group{
-        max-width: 100%;
-            position: relative;
+  #list-group {
+    max-width: 100%;
+    position: relative;
     top: -2rem;
   }
-  .author{
+  .author {
     font-size: 18px;
     text-align: center;
-    margin-left: 20px;
+    margin-left: 2px;
     display: table-cell;
     color: white;
   }
-
 }
-@media  only screen and  (min-width:1281px){
-.input-container{
-  margin-left: 17%;
-}
-#list-group{
-  margin-left: 17%;
-      padding-right: 13%;
-}
-#app-instasearch{
-      margin-left: 60%;
+@media only screen and (min-width: 1281px) {
+  .input-container {
+    margin-left: 17%;
+    padding: 0;
+  }
+  #list-group {
+    margin-left: 17%;
+    padding-right: 13%;
+  }
+  #app-instasearch {
+    margin-left: 60%;
     /* margin-bottom: 16%; */
     margin-top: -6%;
-}
-}
-
-@media (min-width:1075px){
-
+  }
 }
 
-@media (min-width:1025px){
-.input-container{
-  margin-left: 17%;
+@media (min-width: 1075px) {
 }
-#list-group{
-  margin-left: 17%;
-      padding-right: 13%;
-}
+
+@media (min-width: 1025px) {
+  .input-container {
+    margin-left: 17%;
+  }
+  #list-group {
+    margin-left: 17%;
+    padding-right: 13%;
+  }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  .input-container{
-        margin-right: 0;
+  .input-container {
+    margin-right: 0;
     padding: 0;
     max-width: 50%;
     width: 100vw;
   }
-  #list-group{
+  #list-group {
     max-width: 65%;
+        z-index: 50;
   }
 }
 </style>

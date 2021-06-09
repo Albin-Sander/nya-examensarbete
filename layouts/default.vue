@@ -1,11 +1,17 @@
 <template>
+
+  <div>
+    <Nav :showInput="showSearchBar"/>
+
   <div class="layout">
     <Nav />
+
 
     <Nuxt />
     <MusicPlayer />
 
-    <LazyMobileNav />
+    <LazyMobileNav v-on:showsearch="showSearch()" />
+    
   </div>
 </template>
 
@@ -15,6 +21,18 @@ import MusicPlayer from '../components/MusicPlayer'
 
 export default {
   components: { Nav, MusicPlayer },
+  data: () => {
+    return{
+      showSearchBar: false
+    }
+  },
+
+
+  methods: {
+    showSearch(){
+      this.showSearchBar = !this.showSearchBar
+    }
+  }
 }
 </script>
 
