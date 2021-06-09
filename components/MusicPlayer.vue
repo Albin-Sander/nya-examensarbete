@@ -39,7 +39,7 @@ export default {
 audio {
   background-color: blue;
   border-radius: 2rem;
-  width: 25rem;
+  width: 100%;
   margin-bottom: 5rem;
 }
 
