@@ -36,6 +36,11 @@ export default {
 </script>
 
 <style scoped>
+.media-controls {
+  display: flex;
+  justify-content: center;
+}
+
 audio {
   background-color: blue;
   border-radius: 2rem;
