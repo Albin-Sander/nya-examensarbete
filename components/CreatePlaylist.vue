@@ -12,14 +12,19 @@
     </div>
     <div class="button-container">
       <button
+        v-if="playlist.length > 0"
         type="submit"
         id="global-button"
-        class="btn"
-        v-bind:class="{
-          globalBtnActive: playlist.length > 0,
-          globalBtnInactive: playlist.length == 0,
-        }"
+        class="globalBtnActive btn"
         @click="newPlaylist()"
+      >
+        Create
+      </button>
+      <button
+        v-else
+        type="submit"
+        id="global-button"
+        class="btn globalBtnInactive" 
       >
         Create
       </button>
@@ -63,7 +68,8 @@ export default {
         playlist: this.playlist,
       }
       console.log(obj)
-      this.addNewPlaylist(obj)
+      await this.addNewPlaylist(obj)
+      return this.closeMe()
     },
     closeMe() {
       return this.$emit('closeModal')
