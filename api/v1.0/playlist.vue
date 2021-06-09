@@ -12,7 +12,6 @@
           <b-button v-bind:href="value.zip" variant="primary"
             >Download <img src="~/assets/downloadbutton_white.svg"
           /></b-button>
-          <b-button @click="playAudio">test</b-button>
         </b-card>
       </li>
     </ul>
@@ -57,9 +56,6 @@ export default {
       //   yesterday[8] = 3
       // }
 
-      console.log(today)
-      console.log(yesterday)
-
       let url =
         'https://api.jamendo.com/v3.0/playlists/?client_id=a31f0360&format=jsonpretty&datebetween=' +
         yesterday +
@@ -92,25 +88,6 @@ export default {
           console.log(error)
         })
     },
-    play() {
-      let audio = new Audio('https://mp3d.jamendo.com/stream/p500606942/mp32/')
-      audio.play()
-    },
-    playAudio() {
-      let url =
-        'https://api.jamendo.com/v3.0/playlists/tracks/?client_id=a31f0360&format=jsonpretty&limit=2&name=Instrumental&track_type=albumtrack'
-      axios
-        .get(url)
-        .then(function (response) {
-          // handle success
-          console.log(response.data.results)
-          response.play()
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error)
-        })
-    },
   },
   mounted() {
     this.getPlaylist()
@@ -122,12 +99,17 @@ export default {
 .list {
   list-style: none;
   border-style: solid;
-
-  margin-top: 7px;
+  margin-top: 0.4375rem;
   display: flex;
   justify-content: center;
 }
 
-.b-card-title {
+@media only screen and (max-width: 770px) {
+  .list {
+  }
+
+  b-card {
+    margin-top: 2rem;
+  }
 }
 </style>
