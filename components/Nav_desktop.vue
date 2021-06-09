@@ -16,8 +16,8 @@
           <NuxtLink to="/login">Log in</NuxtLink>
         </a>
       </li>
-      <li>
-        <b-button @click="showSearch">Search</b-button>
+      <li class="search-icon">
+        <img @click="showSearch" v-bind:src="require(`../assets/menu/search-icon.svg`)">
       </li>
     </ul>
     <Search v-if="showInput" />
@@ -51,6 +51,11 @@ a {
 @media only screen and (min-width: 770px) {
   .nav-ul {
     display: flex;
+  }
+  .search-icon{
+    cursor: pointer;
+        margin-top: 0.7%;
+    margin-left: 2%;
   }
 }
 </style>
