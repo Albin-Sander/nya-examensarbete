@@ -260,6 +260,11 @@ header {
   justify-content: flex-start;
 }
 
+a {
+  color: white !important;
+  text-decoration: none !important;
+}
+
 .playlist-item {
   list-style: none;
   height: 10rem;
@@ -407,6 +412,7 @@ h1 {
   background-image: url('~@/assets/library/vinyl-icon.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  cursor: pointer;
 }
 
 .track-info {

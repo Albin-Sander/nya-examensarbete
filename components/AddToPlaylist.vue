@@ -59,6 +59,7 @@ export default {
         }
         console.log(obj)
         await this.addTrackAction(obj)
+        return this.closeMe()
     }
   },
   mounted() {
@@ -111,6 +112,10 @@ export default {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     overflow-y: auto;
+}
+
+li {
+  cursor: pointer;
 }
 
 p {

@@ -1,15 +1,18 @@
 <template>
   <div class="playlist-container">
     <header class="playlist-header">
-      <h1>{{ playlistToShow.playlist }}</h1>
-      <h2>{{ playlistToShow.author }}</h2>
+      <div>
+        <h1>{{ playlistToShow.playlist }}</h1>
+        <h2>{{ playlistToShow.author }}</h2>
+      </div>
+      <div class="goBack" @click="backToLibrary()">ᐊ</div>
     </header>
     <main>
-      <h1 v-if="tracks.length === 0">No tracks :(</h1>
+      <h1 class="no-tracks" v-if="tracks.length === 0">No tracks :(</h1>
       <ul v-else class="track-list">
         <li
           class="track-list-item-container"
-          v-for="(track, index) in tracks"
+          v-for="track in tracks"
           :key="track.id"
         >
           <div class="track-container">
@@ -32,7 +35,7 @@
               @click="toggleUnderMenu(track.id)"
             ></div>
           </div>
-          <div
+          <!--<div
             v-bind:class="{
               trackUnderMenu: activeUnderMenu == track.id,
               trackNoUnderMenu: activeUnderMenu !== track.id,
@@ -41,15 +44,13 @@
             <p class="mini-text-under-menu" @click="addTrackToPlaylist(index)">
               Add to playlist
             </p>
-          </div>
+          </div>-->
         </li>
       </ul>
     </main>
     <footer></footer>
   </div>
 </template>
-
-v-bind:style="{ backgroundImage: 'url(' + playlist.album_image + ')', }"
 
 <script>
 import { mapActions } from 'vuex'
@@ -59,6 +60,21 @@ export default {
       playlistToShow: {},
       tracks: [],
     }
+  },
+  filters: {
+    trackTruncate: function (str) {
+      let length = str.length
+      let ending = '...'
+
+      if (length > 30) {
+        console.log(str)
+        let newStr = str.slice(0, 30)
+        console.log('hi')
+        return newStr.concat(ending)
+      } else {
+        return str
+      }
+    },
   },
   methods: {
     ...mapActions({
@@ -85,6 +101,10 @@ export default {
       this.tracks = this.$store.state.playlistToShow.tracks
       return (this.playlistToShow = this.$store.state.playlistToShow)
     },
+
+    backToLibrary() {
+      return (window.location.href = '/library')
+    },
   },
   mounted() {
     this.setPlaylist()
@@ -93,13 +113,53 @@ export default {
 </script>
 
 <style scoped>
-.playlist-header {
+.no-tracks {
   color: white;
-  padding: 1rem;
+  margin-right: auto;
+}
+
+.playlist-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playlist-header {
+  color: #00ddff;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid white;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  min-height: 7rem;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.goBack {
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+main {
+  background-color: transparent;
+  padding: 0;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 90%;
 }
 
 .track-list {
-  width: 95%;
+  width: 100%;
   list-style: none;
   margin: 0;
   padding-left: 0rem;
@@ -127,6 +187,7 @@ export default {
   background-image: url('~@/assets/library/vinyl-icon.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  cursor: pointer;
 }
 
 .track-info {
@@ -177,22 +238,32 @@ export default {
   margin: 0px;
 }
 
-main {
-  background-color: transparent;
-  padding: 1rem;
-  padding-top: 0;
-  display: flex;
-  justify-content: center;
-}
-
 footer {
   height: 6rem;
   background-color: transparent;
   color: #00ddff;
 }
 
-
 @media only screen and (min-width: 768px) {
+  .playlist-header {
+    min-height: 9rem;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  main {
+    padding-top: 2rem;
+  }
+
+  .goBack {
+    font-size: 30px;
+  }
 
   .track-list {
     display: grid;
@@ -217,7 +288,25 @@ footer {
   }
 }
 
+@media only screen and (min-width: 900px) {
+  .playlist-header {
+    width: 80%;
+  }
+
+  main {
+    width: 80%;
+    padding-top: 3rem;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
+  .playlist-header {
+    width: 70%;
+  }
+
+  main {
+    width: 70%;
+  }
 
   .track-list {
     width: 100%;
@@ -227,6 +316,15 @@ footer {
 }
 
 @media only screen and (min-width: 1500px) {
+  .playlist-header {
+    width: 60%;
+  }
+  main {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1660px) {
   .track-list {
     grid-template-columns: repeat(3, 1fr);
   }
