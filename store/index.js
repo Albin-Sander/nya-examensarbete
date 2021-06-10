@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export const state = () => ({
   credentialsExist: false,
   userLibrary: {},
+  playlistToShow: '',
   music: '',
 })
 
@@ -26,6 +27,22 @@ export const mutations = {
   setMusic(state, { url }) {
     state.music = url
   },
+
+  setPlaylist(state, payload) {
+    let obj = {
+      playlist: payload.playlist,
+      author: payload.author,
+      tracks: payload.tracks
+    }
+    console.log(obj)
+    state.playlistToShow = obj
+    console.log(state.playlistToShow)
+  },
+
+  setUserPlaylist(state, payload) {
+    console.log(payload)
+    state.playlistToShow = payload
+  }
 }
 
 export const actions = {
@@ -87,6 +104,22 @@ export const actions = {
       let result = await snapshot.forEach((doc) => {
         result = doc.data()
         context.commit('setUserLibrary', result)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  async getUserPlaylist(context, param) {
+    try {
+      console.log(param)
+      const ref = this.$fire.firestore.collection('users')
+      const snapshot = await ref.where('email', '==', param.email).get()
+      let result = await snapshot.forEach((doc) => {
+        result = doc.data()
+        let playlistName = result.library.playlists.find(item => item.playlist == param.playlist)
+        console.log(playlistName)
+        context.commit('setUserPlaylist', playlistName)
       })
     } catch (e) {
       console.log(e)

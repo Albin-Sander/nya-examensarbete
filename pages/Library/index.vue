@@ -45,37 +45,41 @@
 
           <li
             class="playlist-item"
-            v-for="playlist in userPlaylists"
+            v-for="(playlist) in userPlaylists"
             :key="playlist.playlist"
           >
-            <article class="playlist-preview card">
-              <ul class="playlist-tracks">
-                <li
-                  v-for="(track, index) in playlist.tracks.slice(0, 3)"
-                  :key="index"
-                  class="playlist-track"
-                >
-                  <div
-                    class="play card"
-                    v-bind:style="{
-                      backgroundImage: 'url(' + track.album_image + ')',
-                    }"
-                  ></div>
-                  <div class="track-info-container">
-                    <p class="track-preview-info">
-                      {{ track.name | trackPreviewTruncate() }}
-                    </p>
-                    <p class="track-preview-info">
-                      {{ track.artist_name | trackPreviewTruncate() }}
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </article>
-            <footer class="playlist-info">
-              <p class="mini-text">{{ playlist.playlist }}</p>
-              <p class="mini-text">{{ playlist.author }}</p>
-            </footer>
+            <NuxtLink
+              class="playlist-preview card"
+              
+              :to="{ path: '/playlist', query: { id: playlist.playlist } }"
+            >
+                <ul class="playlist-tracks">
+                  <li
+                    v-for="(track, index) in playlist.tracks.slice(0, 3)"
+                    :key="index"
+                    class="playlist-track"
+                  >
+                    <div
+                      class="play card"
+                      v-bind:style="{
+                        backgroundImage: 'url(' + track.album_image + ')',
+                      }"
+                    ></div>
+                    <div class="track-info-container">
+                      <p class="track-preview-info">
+                        {{ track.name | trackPreviewTruncate() }}
+                      </p>
+                      <p class="track-preview-info">
+                        {{ track.artist_name | trackPreviewTruncate() }}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </NuxtLink>
+              <footer class="playlist-info">
+                <p class="mini-text">{{ playlist.playlist }}</p>
+                <p class="mini-text">{{ playlist.author }}</p>
+              </footer>
           </li>
         </ul>
       </header>
@@ -121,7 +125,7 @@
               </p>
             </div>
           </li>
-        </ul> 
+        </ul>
       </main>
       <footer class="mobile-footer"><p>Powered by Jamendo</p></footer>
     </div>
@@ -132,6 +136,7 @@
 import CreatePlaylist from '../../components/CreatePlaylist'
 import AddToPlaylist from '../../components/AddToPlaylist'
 import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -142,7 +147,7 @@ export default {
     return {
       user: {},
       likedTracks: [],
-      userPlaylists: {},
+      userPlaylists: [],
       activeUnderMenu: '',
       showNewPlaylistModal: false,
       showAddToPlaylist: false,
@@ -182,6 +187,9 @@ export default {
       getUserLibrary: 'getUserLibrary',
       addNewPlaylist: 'addNewPlaylist',
     }),
+    ...mapMutations({
+      setPlaylist: 'setPlaylist',
+    }),
     async checkUser() {
       let vm = this
       await this.$fire.auth.onAuthStateChanged(async function (user) {
@@ -203,7 +211,6 @@ export default {
       let data = this.$store.state.userLibrary
       this.likedTracks = data.likedTracks
       this.userPlaylists = data.playlists
-      console.log(data)
     },
     async toggleNewPlaylistModal() {
       return (this.showNewPlaylistModal = !this.showNewPlaylistModal)
@@ -220,8 +227,11 @@ export default {
     async addTrackToPlaylist(param) {
       let track = this.likedTracks[param]
       this.trackToAdd = track
-      console.log(track)
       return (this.showAddToPlaylist = !this.showAddToPlaylist)
+    },
+    showPlaylist(param) {
+      this.setPlaylist(this.userPlaylists[param])
+      return (window.location.href = '/library/playlist')
     },
   },
 
@@ -250,6 +260,11 @@ header {
   justify-content: flex-start;
 }
 
+a {
+  color: white !important;
+  text-decoration: none !important;
+}
+
 .playlist-item {
   list-style: none;
   height: 10rem;
@@ -258,6 +273,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .playlists-grid {
