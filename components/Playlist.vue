@@ -3,14 +3,21 @@
     <ul id="v-for-object">
       <h1>Most Popular Playlists last 24 hours</h1>
       <li v-for="(value, index) in playLists" :key="index" class="list">
-        <b-card :title="value.name" class="b-card-title text-center">
+        <b-card
+          :title="value.name"
+          class="b-card-title text-center"
+          header-class="card_header"
+        >
           <b-button
             v-bind:href="value.shorturl"
             target="_blank"
             variant="primary"
             >Go to playlist <img src="~/assets/arrow-right_white.svg"
           /></b-button>
-          <b-button v-bind:href="value.zip" variant="primary"
+          <b-button
+            v-bind:href="value.zip"
+            variant="primary"
+            header-class="card_header"
             >Download <img src="~/assets/downloadbutton_white.svg"
           /></b-button>
         </b-card>
@@ -112,6 +119,10 @@ export default {
   b-card {
     margin-top: 2rem;
   }
+
+  h1 {
+    font-size: 1.5rem;
+  }
 }
 
 #main {
@@ -122,15 +133,5 @@ export default {
 h1 {
   color: white;
   display: flex;
-}
-
-@media only screen and (max-width: 770px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  b-button {
-    margin-bottom: 1rem;
-  }
 }
 </style>
