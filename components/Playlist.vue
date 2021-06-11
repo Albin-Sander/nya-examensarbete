@@ -1,15 +1,23 @@
 <template>
   <div id="main">
     <ul id="v-for-object">
+      <h1>Most Popular Playlists last 24 hours</h1>
       <li v-for="(value, index) in playLists" :key="index" class="list">
-        <b-card :title="value.name" class="b-card-title text-center">
+        <b-card
+          :title="value.name"
+          class="b-card-title text-center"
+          header-class="card_header"
+        >
           <b-button
             v-bind:href="value.shorturl"
             target="_blank"
             variant="primary"
             >Go to playlist <img src="~/assets/arrow-right_white.svg"
           /></b-button>
-          <b-button v-bind:href="value.zip" variant="primary"
+          <b-button
+            v-bind:href="value.zip"
+            variant="primary"
+            header-class="card_header"
             >Download <img src="~/assets/downloadbutton_white.svg"
           /></b-button>
         </b-card>
@@ -98,8 +106,8 @@ export default {
 <style>
 .list {
   list-style: none;
-  border-style: solid;
-  margin-top: 0.4375rem;
+
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -111,5 +119,19 @@ export default {
   b-card {
     margin-top: 2rem;
   }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+#main {
+  display: flex;
+  flex-direction: row;
+}
+
+h1 {
+  color: white;
+  display: flex;
 }
 </style>

@@ -1,26 +1,16 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">examensarbete</h1>
-      <div class="links">
-        <NuxtLink to="/login">Log in</NuxtLink>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-      <p></p>
-    </div>
+    <Playlist />
   </div>
 </template>
 
 <script>
-export default {}
+import PlayList from '../components/Playlist.vue'
+export default {
+  components: {
+    PlayList,
+  },
+}
 </script>
 
 <style>
@@ -28,8 +18,8 @@ export default {}
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 .title {
