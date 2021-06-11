@@ -1,6 +1,7 @@
 <template>
   <div id="main">
     <ul id="v-for-object">
+      <h1>Most Popular Playlists last 24 hours</h1>
       <li v-for="(value, index) in playLists" :key="index" class="list">
         <b-card :title="value.name" class="b-card-title text-center">
           <b-button
@@ -98,8 +99,8 @@ export default {
 <style>
 .list {
   list-style: none;
-  border-style: solid;
-  margin-top: 0.4375rem;
+
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -110,6 +111,26 @@ export default {
 
   b-card {
     margin-top: 2rem;
+  }
+}
+
+#main {
+  display: flex;
+  flex-direction: row;
+}
+
+h1 {
+  color: white;
+  display: flex;
+}
+
+@media only screen and (max-width: 770px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  b-button {
+    margin-bottom: 1rem;
   }
 }
 </style>
