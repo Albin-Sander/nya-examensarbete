@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <ul id="v-for-object">
-      <h1>Most Popular Playlists last 24 hours</h1>
+      <h1>Latest playlists last 24 hours</h1>
       <li v-for="(value, index) in playLists" :key="index" class="list">
         <b-card
           :title="value.name"
