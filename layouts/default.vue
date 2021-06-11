@@ -1,20 +1,43 @@
 <template>
   <div>
-    <Nuxt />
+    <div class="layout">
+      <Nav :showInput="showSearchBar" v-on:showsearch="showSearch()" />
+      <Nuxt />
+      <MusicPlayer />
+
+      <LazyMobileNav v-on:showsearch="showSearch()" />
+    </div>
   </div>
 </template>
 
+<script>
+import Nav from '../components/Nav_desktop'
+import MusicPlayer from '../components/MusicPlayer'
+
+export default {
+  components: { Nav, MusicPlayer },
+  data: () => {
+    return {
+      showSearchBar: false,
+    }
+  },
+
+  methods: {
+    showSearch() {
+      this.showSearchBar = !this.showSearchBar
+    },
+  },
+}
+</script>
+
 <style>
+.layout {
+  width: 100%;
+}
+
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -24,39 +47,51 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
+h1,
+h2,
+h4,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+p,
+input {
+  font-family: 'Lato', sans-serif;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.card {
+  background-color: #1e1133;
+  border: solid white 1px;
+  border-radius: 0.2rem;
+  color: white;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+body {
+  background-color: #271642;
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.globalBtnActive {
+  background-color: #17a2b8;
+  color: white;
+  font-family: 'Lato', sans-serif;
+}
+
+.globalBtnActive:hover {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.globalBtnInactive {
+  background-color: #17a2b89e;
+  /* #106B79 */
+  font-family: 'Lato', sans-serif;
+  color: white;
+}
+
+.globalBtnInactive:hover {
+  background-color: #17a2b89e;
+  color: white;
 }
 </style>
